@@ -1,0 +1,23 @@
+.carousel {
+    margin: 0 auto;
+    position: relative;
+    height: 750px;
+    width: 100%;
+}
+
+.carousel__image{
+    width: 100%;
+}
+
+.carousel__TrackCtnr
+{
+    background: lightgreen;
+}
+
+.carousel__track{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    /* flex-wrap: wrap; */
+}
