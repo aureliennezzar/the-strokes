@@ -7,24 +7,59 @@ nav{
     align-items: center;
     justify-content: space-between;
     position: fixed;
-    z-index: 999;
-    transition: .1s;
+    z-index: 10;
+    transition: background .2s;
 }
+/* nav * {
+    border: 1px solid red;
+} */
 .nav__brand{
-    padding-left: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 250px;
     font-size: 25px;
     transition: .2s;
 }
 .nav__link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    height: 100%;
+    margin: 0;
+}
+.nav__link h1{
+    margin: 0;
 }
 .nav__links{
     display: flex;
+    position: absolute;
+    left: calc(50% - 400px/2);
     justify-content: space-between;
     width: 400px;
-
 }
 .nav__buttons{
     width: 100px;
     height: 100%;
 }
+.nav__links-burger{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    right: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: opacity .5s;
+    will-change: opacity;
+}
+@media screen and (max-width: 930px) {
+    .nav__links{
+        visibility: hidden;
+    }
+    .nav__links-burger{
+        visibility: visible;
+        opacity: 1;
+    }
+  }

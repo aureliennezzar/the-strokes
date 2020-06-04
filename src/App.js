@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InstaCarousel from './components/InstaCarousel';
 import "./App.css"
 import Nav from './components/Nav';
-import Section from './components/Section';
 import Hero from './components/Hero';
+import Contact from './components/Contact';
+import { auth } from './services/firebase';
+import TourDates from './components/TourDates';
 
 function App() {
-
   document.addEventListener("DOMContentLoaded", function () {
 
     let active = false;
@@ -40,13 +41,24 @@ function App() {
 
 
   });
-
+  useEffect(()=>{
+    auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log('users connected')
+        // User is signed in.
+      } else {
+        console.log('no users connected')
+        // No user is signed in.
+      }
+    });
+  },[])
   return (
     <div className="App">
       <Nav />
       <Hero />
-      <Section />
+      <TourDates />
       <InstaCarousel />
+      <Contact />
     </div>
   );
 }

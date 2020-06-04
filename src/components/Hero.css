@@ -10,3 +10,31 @@
     object-fit: cover;
     /* min-height: 100vh; */
 }
+
+.hero__mute-button{
+    display: flex;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    top: calc(50vh - 40px/2);
+    left: 4vw;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.hero__scroll-button{
+    display: flex;
+    position: absolute;
+    font-size: 30px;
+    left: calc(50vw - 40px/2);
+    bottom: 0px;
+    color: #fff;
+    width: auto;
+    height: 60px;
+    /* border: 1px solid red; */
+    cursor: pointer;
+}

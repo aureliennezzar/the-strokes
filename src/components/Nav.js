@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, animateScroll as scroll } from "react-scroll";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Nav.css'
 const Nav = () => {
     return (
@@ -11,7 +13,7 @@ const Nav = () => {
                     spy={true}
                     smooth={true}
                     offset={0}
-                    duration={300}
+                    duration={500}
                     key="Home"
                     className="nav__link">
                     <h1>The Strokes</h1>
@@ -24,19 +26,19 @@ const Nav = () => {
                     to="section"
                     spy={true}
                     smooth={true}
-                    offset={0}
-                    duration={300}
+                    offset={-60}
+                    duration={500}
                     key="Album"
                     className="nav__link">
-                    Le nouvel album
+                    Album
                 </Link>
                 <Link
                     activeClass="active"
                     to="instagram"
                     spy={true}
                     smooth={true}
-                    offset={0}
-                    duration={300}
+                    offset={-60}
+                    duration={500}
                     key="Instagram"
                     className="nav__link">
                     Instagram
@@ -46,16 +48,16 @@ const Nav = () => {
                     to="section"
                     spy={true}
                     smooth={true}
-                    offset={0}
-                    duration={300}
+                    offset={-60}
+                    duration={500}
                     key="Newsletter"
                     className="nav__link">
                     Newsletter
                 </Link>
 
             </div>
-            <div className="nav__buttons">
-
+            <div className="nav__links-burger">
+                <FontAwesomeIcon icon={faBars} />
             </div>
 
         </nav>

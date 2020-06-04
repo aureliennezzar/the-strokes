@@ -1,0 +1,38 @@
+.contact {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 50vh;
+    background: #fff;
+}
+
+.contact h1 {
+    position: absolute;
+    top: 10px;
+}
+.contact__links-ctnr{
+    position: absolute;
+    bottom: 30px;
+}
+.contact__links {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.contact__links li{
+    cursor: pointer;
+}
+.contact__overlay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.877);
+    z-index: 20;
+}
