@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './TourDates.css'
 import { db } from '../services/firebase';
 import { auth } from 'firebase';
+import AdminPanelTd from './AdminPanelTd';
 const TourDates = () => {
     const [isAdmin, setRole] = useState(false)
-    const [dates, setDates] = useState([]);
-    const [showOverlay, setOverlay] = useState(false)
+    const [events, setEvents] = useState([]);
+    const [showOverlay, setOverlay] = useState(true)
+    const tourDatesRef = db.collection("tour-dates")
 
     const handleClick = (e) => {
         const overlay = document.querySelector('.tourDates__admin-panel')
@@ -22,35 +24,28 @@ const TourDates = () => {
                 setRole(false)
             }
         });
-        const tourDatesRef = db.collection("tour-dates")
-        tourDatesRef.onSnapshot((querySnapshot) => {
-            let newDates = []
-            querySnapshot.forEach((doc) => {
-                const { lieu, date } = doc.data()
-                newDates.push({
-                    lieu,
-                    date
-                })
-                console.log(doc.id, "=>", doc.data());
-            })
-            setDates(newDates)
+        return tourDatesRef.onSnapshot((snapshot) => {
+            const eventsData = []
+            snapshot.forEach(doc => eventsData.push(({ ...doc.data(), id: doc.id })))
+            setEvents(eventsData)
         })
-
     }, [])
+
+
 
     return (
         <section className="tourDates">
-            <h1>Dates de tournées</h1>
+            <h1 className="tourDates__title">Dates de tournées</h1>
             {isAdmin
                 ? < a className="tourDates__modify" onClick={handleClick}>Modifier</a>
                 : null}
             <div className="tourDates__dates-ctnr">
                 <ul className="tourDates__dates-list">
-                    {dates.map(date => {
+                    {events.map(event => {
                         return (
-                            <li key={date.date.seconds}>
-                                <span className="tourDates__loc">{date.lieu[0]},</span> <span className="tourDates__loc2">{date.lieu[1]}</span><br />
-                                <span className="tourDates__date">{date.date.seconds}</span><br />
+                            <li key={event.id}>
+                                <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
+                                <span className="tourDates__date">{event.date}</span><br />
                                 lien
                             </li>
                         )
@@ -60,36 +55,7 @@ const TourDates = () => {
 
             {
                 showOverlay
-                    ? <div className="tourDates__admin-panel" onClick={handleClick}>
-                        <div className="td__admin-panel-ctnr">
-                            <ul className="td__admin-panel-datesList">
-                                <li>
-                                    <input type="text" value="AccorHotel Arena"></input>
-                                    <input type="text" value="Paris"></input>
-                                    <input type="text" value="date"></input><br />
-                                    <input type="text" value="www.google.com"></input>
-                                </li>
-                                <li>
-                                    <input type="text" value="AccorHotel Arena"></input>
-                                    <input type="text" value="Paris"></input>
-                                    <input type="text" value="date"></input><br />
-                                    <input type="text" value="www.google.com"></input>
-                                </li>
-                                <li>
-                                    <input type="text" value="AccorHotel Arena"></input>
-                                    <input type="text" value="Paris"></input>
-                                    <input type="text" value="date"></input><br />
-                                    <input type="text" value="www.google.com"></input>
-                                </li>
-                                <li>
-                                    <input type="text" value="AccorHotel Arena"></input>
-                                    <input type="text" value="Paris"></input>
-                                    <input type="text" value="date"></input><br />
-                                    <input type="text" value="www.google.com"></input>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    ? <AdminPanelTd handleClick={handleClick} />
                     : null
             }
 
