@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Login.css"
+import "./styles/Login.css"
 import { auth } from 'firebase';
 const Login = (props) => {
     const [state, setState] = useState({

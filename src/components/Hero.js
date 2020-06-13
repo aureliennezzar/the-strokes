@@ -5,12 +5,12 @@ import { faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, animateScroll as scroll } from "react-scroll";
-import './Hero.css'
+import './styles/Hero.css'
 
 const Hero = () => {
     const [state, setState] = useState({
         muteIcon: faVolumeMute,
-        video: null
+        video: undefined
     })
     document.addEventListener("DOMContentLoaded", function () {
         const video = document.querySelector('.hero__video')
@@ -29,9 +29,6 @@ const Hero = () => {
             muteIcon: video.muted ? faVolumeMute : faVolumeUp,
         })
     }
-    const handleScroll = () => {
-        alert('scroll')
-    }
     return (
         <section className='hero'>
             <video className="hero__video" loop infi autoPlay muted width="100%">
@@ -44,15 +41,15 @@ const Hero = () => {
             <div className="hero__mute-button" onClick={handleClick}>
                 <FontAwesomeIcon icon={state.muteIcon} />
             </div>
-            <div className="hero__scroll-button" onClick={handleScroll}>
+            <div className="hero__scroll-button">
                 <Link
                     activeClass="active"
-                    to="section"
+                    to="theStrokes"
                     spy={true}
                     smooth={true}
                     offset={-60}
                     duration={500}
-                    key="Newsletter"
+                    key="theStrokes"
                     className="nav__link">
                     <FontAwesomeIcon icon={faChevronDown} />
                 </Link>

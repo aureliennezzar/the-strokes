@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import InstaCarousel from './components/InstaCarousel';
 import "./App.css"
 import Nav from './components/Nav';
@@ -6,10 +6,13 @@ import Hero from './components/Hero';
 import Contact from './components/Contact';
 import { auth } from './services/firebase';
 import TourDates from './components/TourDates';
+import NewsPanel from './components/NewsPanel';
+import { RoleContext } from './contexts/RoleContext';
+import Strokes from './components/Strokes';
+import Album from './components/Album';
 
-function App() {
+const App = () => {
   document.addEventListener("DOMContentLoaded", function () {
-
     let active = false;
     const nav = document.querySelector('.nav')
     const navBrand = document.querySelector('.nav__brand')
@@ -20,12 +23,14 @@ function App() {
         nav.style.background = "#ffffff00"
         nav.style.color = "#fff"
         navBrand.style.fontSize = "25px"
+        nav.style.boxShadow = "none"
       }
       if (active === false && window.scrollY >= 130) {
         active = true
         nav.style.background = "#fff"
         nav.style.color = "#000"
         navBrand.style.fontSize = "15px"
+        nav.style.boxShadow = "0px 2px 5px 0px rgba(0, 0, 0, 0.75)"
 
 
       }
@@ -38,27 +43,34 @@ function App() {
         clearInterval(checkExist);
       }
     }, 100); // check every 100ms
-
-
   });
-  useEffect(()=>{
-    auth().onAuthStateChanged(function(user) {
+  const [isAdmin, setRole] = useState(false)
+  useEffect(() => {
+    auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log('users connected')
-        // User is signed in.
+        setRole(true)
       } else {
-        console.log('no users connected')
-        // No user is signed in.
+        setRole(false)
       }
     });
-  },[])
+  }, [])
   return (
     <div className="App">
-      <Nav />
-      <Hero />
-      <TourDates />
-      <InstaCarousel />
-      <Contact />
+      <RoleContext.Provider value={isAdmin}>
+        <header>
+          <Nav />
+        </header>
+        <main>
+          <Hero />
+          <Strokes />
+          <Album />
+          <TourDates />
+          <NewsPanel />
+        </main>
+        <footer>
+          <Contact />
+        </footer>
+      </RoleContext.Provider>
     </div>
   );
 }

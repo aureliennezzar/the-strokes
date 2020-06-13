@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, animateScroll as scroll } from "react-scroll";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faInstagram, faYoutube, faTwitter } from "@fortawesome/fontawesome-free-brands";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './Nav.css'
+import './styles/Nav.css'
+const cymbSound = new Audio("cymb.mp3")
+cymbSound.volume = 0.5
 const Nav = () => {
+    const [count, setCount] = useState(0)
+    const [isBroke, setBroke] = useState(false)
+    const [brandTitle, setTitle] = useState("The Strokes")
+    const playSound = () => {
+
+        const audio = document.createElement("audio")
+        if (count === 10) {
+            cymbSound.play()
+            setTitle('Bien joué !')
+            setCount(count + 1)
+        } else if (count < 10) {
+            const audio = document.createElement("audio")
+            if (count % 2) {
+                audio.src = "hat.mp3"
+            } else {
+                audio.src = "hit.mp3"
+            }
+            audio.volume = 0.3
+            audio.play()
+            setCount(count + 1)
+        }
+    }
     return (
         <nav className='nav'>
             <div className="nav__brand">
@@ -15,15 +41,38 @@ const Nav = () => {
                     offset={0}
                     duration={500}
                     key="Home"
-                    className="nav__link">
-                    <h1>The Strokes</h1>
+                    className="nav__link"
+                    onClick={playSound}>
+                    <h1>{brandTitle}</h1>
                 </Link>
 
             </div>
             <div className="nav__links">
                 <Link
                     activeClass="active"
-                    to="section"
+                    to="hero"
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={500}
+                    key="Acceuil"
+                    className="nav__link">
+                    Accueil
+                </Link>
+                <Link
+                    activeClass="active"
+                    to="theStrokes"
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={500}
+                    key="Strokes"
+                    className="nav__link">
+                    The Strokes
+                </Link>
+                <Link
+                    activeClass="active"
+                    to="album"
                     spy={true}
                     smooth={true}
                     offset={-60}
@@ -34,27 +83,43 @@ const Nav = () => {
                 </Link>
                 <Link
                     activeClass="active"
-                    to="instagram"
+                    to="tourDates"
                     spy={true}
                     smooth={true}
                     offset={-60}
                     duration={500}
-                    key="Instagram"
+                    key="tourDates"
                     className="nav__link">
-                    Instagram
+                    Tournée
                 </Link>
                 <Link
                     activeClass="active"
-                    to="section"
+                    to="newsPanel"
                     spy={true}
                     smooth={true}
                     offset={-60}
                     duration={500}
-                    key="Newsletter"
+                    key="newsPanel"
                     className="nav__link">
-                    Newsletter
+                    Blog
+                </Link>
+                <Link
+                    activeClass="active"
+                    to="contact"
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={500}
+                    key="Contact"
+                    className="nav__link">
+                    Contact
                 </Link>
 
+            </div>
+            <div className="nav__links-icons">
+                <FontAwesomeIcon className="icon" icon={faYoutube} title="Youtube" />
+                <FontAwesomeIcon className="icon" icon={faInstagram} title="Instagram" />
+                <FontAwesomeIcon className="icon" icon={faTwitter} title="Twitter" />
             </div>
             <div className="nav__links-burger">
                 <FontAwesomeIcon icon={faBars} />

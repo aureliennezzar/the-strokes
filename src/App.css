@@ -1,3 +1,19 @@
 .eapps-remove-link {
     visibility: hidden;
 }
+
+/* .App {
+    display: flex;
+    overflow: auto;
+    flex: none;
+    width: 100vw;
+    height: 100vh;
+    flex-flow: column nowrap;
+    scroll-snap-type: y mandatory;
+}
+
+.App>section{
+    text-align: center;
+    scroll-snap-align: start;
+    flex: none;
+} */

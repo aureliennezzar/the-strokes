@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Fade from 'react-reveal/Fade';
-import './Event.css'
+import './styles/Event.css'
 import { db } from '../services/firebase';
 
 const Event = ({ event, index }) => {
@@ -58,7 +58,10 @@ const Event = ({ event, index }) => {
                 <div className="event-header__btnCtnr">
                     {confirm
 
-                        ? <button onClick={() => db.collection("tour-dates").doc(event.id).delete()}>Oui</button>
+                        ? <button onClick={() => {
+                            db.collection("tour-dates").doc(event.id).delete()
+                            setConfirm(false)
+                        }}>Oui</button>
                         : <button onClick={handleDelete}>Supprimer</button>}
 
                     {confirm
@@ -70,7 +73,7 @@ const Event = ({ event, index }) => {
                             </>
                             : <button onClick={handleModify}>Modifier</button>
                     }
-                    
+
 
 
                 </div>

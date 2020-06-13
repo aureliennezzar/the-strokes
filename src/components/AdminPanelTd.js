@@ -65,7 +65,7 @@ const AdminPanelTd = (props) => {
                     height: "100%",
                     overflow: "auto"
                 }}>
-                    <div className="td__admin-panel-datesList">
+                    <ul className="td__admin-panel-datesList">
                         {newEvent
                             ?
                             <li className="event-ctnr">
@@ -87,6 +87,7 @@ const AdminPanelTd = (props) => {
                                         <option value="2">Festival</option>
                                     </select>
                                     <input placeholder="Lien boutique" name="lien" onChange={handleChange} value={state.lien}></input>
+                                    
                                 </div>
                             </li>
                             : null}
@@ -94,7 +95,7 @@ const AdminPanelTd = (props) => {
                         {events.map((event, i) => (
                                 <Event event={event} index={i} />
                         ))}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>

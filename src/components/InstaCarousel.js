@@ -6,7 +6,7 @@ import image4 from '../assets/image4.jpg'
 import image5 from '../assets/image5.jpg'
 import image6 from '../assets/image6.jpg'
 import image7 from '../assets/image7.jpg'
-import "./InstaCarousel.css"
+import "./styles/InstaCarousel.css"
 const instaCarousel = () => {
     return (
         <div className="elfsight-app-b52e90c9-042f-4893-8089-e78340cbb23c instagram">

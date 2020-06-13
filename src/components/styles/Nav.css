@@ -1,4 +1,4 @@
-nav{
+nav {
     background: #ffffff00;
     color: white;
     display: flex;
@@ -10,10 +10,22 @@ nav{
     z-index: 10;
     transition: background .2s;
 }
+.icon{
+    cursor: pointer;
+}
+
+.nav__links-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    padding: 10px;
+}
+
 /* nav * {
     border: 1px solid red;
 } */
-.nav__brand{
+
+.nav__brand {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,7 +34,8 @@ nav{
     font-size: 25px;
     transition: .2s;
 }
-.nav__link{
+
+.nav__link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,21 +43,30 @@ nav{
     height: 100%;
     margin: 0;
 }
-.nav__link h1{
+
+.nav{
     margin: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -ms-user-select: none; 
 }
-.nav__links{
+
+.nav__links {
     display: flex;
     position: absolute;
     left: calc(50% - 400px/2);
     justify-content: space-between;
-    width: 400px;
+    width: 500px;
 }
-.nav__buttons{
+
+.nav__buttons {
     width: 100px;
     height: 100%;
 }
-.nav__links-burger{
+
+.nav__links-burger {
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -54,12 +76,13 @@ nav{
     transition: opacity .5s;
     will-change: opacity;
 }
+
 @media screen and (max-width: 930px) {
-    .nav__links{
+    .nav__links, .nav__links-icons {
         visibility: hidden;
     }
-    .nav__links-burger{
+    .nav__links-burger {
         visibility: visible;
         opacity: 1;
     }
-  }
+}

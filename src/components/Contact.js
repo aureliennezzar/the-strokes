@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Contact.css'
+import './styles/Contact.css'
 import Login from './Login';
 import { auth } from 'firebase';
 const Contact = () => {
@@ -37,7 +37,7 @@ const Contact = () => {
                 <ul className="contact__links">
                     {isAdmin
                         ? <li className="contact__connect" onClick={handleClick}>Se deconnecter</li>
-                        : <li className="contact__connect" onClick={handleClick}>Se connecter</li>}
+                        : <li className="contact__connect" onClick={handleClick}>Admin</li>}
 
                 </ul>
             </div>
