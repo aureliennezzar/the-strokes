@@ -9,13 +9,17 @@ nav {
     position: fixed;
     z-index: 10;
     transition: background .2s;
+    touch-action: manipulation;
 }
-.icon{
+
+.icon {
     cursor: pointer;
 }
 
 .nav__links-icons {
     display: flex;
+    position: absolute;
+    right: 30px;
     justify-content: space-between;
     width: 100px;
     padding: 10px;
@@ -44,13 +48,13 @@ nav {
     margin: 0;
 }
 
-.nav{
+.nav {
     margin: 0;
     user-select: none;
     -webkit-user-select: none;
-    -moz-user-select: none; 
-    -khtml-user-select: none; 
-    -ms-user-select: none; 
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
 }
 
 .nav__links {
@@ -66,23 +70,23 @@ nav {
     height: 100%;
 }
 
-.nav__links-burger {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    right: 30px;
-    font-size: 25px;
-    cursor: pointer;
-    transition: opacity .5s;
-    will-change: opacity;
-}
-
 @media screen and (max-width: 930px) {
+    .bar1, .bar2, .bar3 {
+        transition: 0.4s;
+    }
     .nav__links, .nav__links-icons {
         visibility: hidden;
     }
     .nav__links-burger {
         visibility: visible;
-        opacity: 1;
+    }
+    #menuToggle {
+        visibility: visible;
+    }
+}
+@media screen and (max-width: 550px) {
+    #menu{
+        width: 80vw;
+        padding: 50px 10vw;
     }
 }

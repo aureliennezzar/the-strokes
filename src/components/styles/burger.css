@@ -1,0 +1,102 @@
+.nav__links-burger {
+    position: absolute;
+    display: inline-block;
+    visibility: hidden;
+    right: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0;
+    z-index: 2;
+}
+
+.burgerBars {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px 0;
+    border-radius: 5px;
+}
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+.change .bar1,.change  .bar2,.change  .bar3 {
+    background-color: black !important;
+}
+
+/*
+ * Made by Erik Terwan
+ * 24th of November 2015
+ * MIT License
+ *
+ *
+ * If you are thinking of using this in
+ * production code, beware of the browser
+ * prefixes.
+ */
+
+#menuToggle {
+    display: block;
+    position: relative;
+    top: 50px;
+    left: 50px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.menuLinks {
+    text-decoration: none;
+    color: #232323;
+    transition: color 0.3s ease;
+}
+
+.menuLinks:hover {
+    color: tomato;
+}
+
+
+
+/*
+  * Make this absolute positioned
+  * at the top left of the screen
+  */
+
+#menu {
+    position: absolute;
+    width: 200px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 60px;
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+}
+
+.changeMenu {
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+.hideMenu {
+    transform-origin: 0% 0%;
+    transform: translate(100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li {
+    padding: 10px 0;
+    font-size: 22px;
+    width: 100%;
+    text-align: left;
+}

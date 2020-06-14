@@ -49,15 +49,17 @@ const NewsPanel = () => {
             <div className="news__container">
                 <div className="news__importantNews">
                     {importantNews
-                        ? <>
-                            <span style={{ fontSize: "35px" }}>{importantNews.titre}</span>
+                        ? <div style={{width:"80%", height:"80%"}}>
+                            <h2 style={{fontSize: "25px" }}>{importantNews.titre}</h2>
                             <div className="news__importantNews-imageCtnr">
                                 {importantNews.image.length > 0
                                     ? <img src={importantNews.image}></img>
                                     : "Pas d'image"}
                             </div>
-                            <p>{importantNews.description}</p>
-                        </>
+                            <p style={{
+                                textAlign: "right"
+                            }}>{importantNews.description}</p>
+                        </div>
                         : null
                     }
                 </div>
@@ -65,16 +67,19 @@ const NewsPanel = () => {
                     {news.map(data => {
                         return (
                             <li key={data.id} >
-                                <span style={{
-                                    fontSize: "35px",
+                                <h2 style={{
+                                    fontSize: "25px",
                                     borderBottom: "4px solid #FFC045",
-                                    width: "80%"
-                                }}>{data.titre}</span>
-                                <div className="news__news-imageCtnr">
-                                    {data.image.length > 0
-                                        ? <img src={data.image}></img>
-                                        : "Pas d'image"}<br></br>
+                                    width: "65%"
+                                }}>{data.titre}</h2>
+                                <div className="news__news-body">
+                                    <div className="news__news-imageCtnr">
+                                        {data.image.length > 0
+                                            ? <img src={data.image}></img>
+                                            : "Pas d'image"}<br></br>
 
+                                    </div>
+                                    <p>{data.description}</p>
                                 </div>
                             </li>
                         )

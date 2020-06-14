@@ -2,15 +2,28 @@ import React, { useState } from 'react';
 import { Link, animateScroll as scroll } from "react-scroll";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faYoutube, faTwitter } from "@fortawesome/fontawesome-free-brands";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './styles/burger.css'
 import './styles/Nav.css'
 const cymbSound = new Audio("cymb.mp3")
 cymbSound.volume = 0.5
 const Nav = () => {
     const [count, setCount] = useState(0)
+    const [burgerOn, setBurger] = useState(false)
     const [isBroke, setBroke] = useState(false)
     const [brandTitle, setTitle] = useState("The Strokes")
+
+    window.addEventListener("resize", () => {
+
+        // Get width and height of the window excluding scrollbars
+        var w = document.documentElement.clientWidth;
+        var h = document.documentElement.clientHeight;
+        console.log(w, h);
+        if (w > 930) {
+            setBurger(false)
+        }
+
+    });
     const playSound = () => {
 
         const audio = document.createElement("audio")
@@ -30,6 +43,16 @@ const Nav = () => {
             setCount(count + 1)
         }
     }
+    const handleBurger = (e) => {
+        setBurger(!burgerOn)
+    }
+    const linksData = [
+        { scroll: "hero", name: "Accueil" },
+        { scroll: "theStrokes", name: "The Strokes" },
+        { scroll: "album", name: "Album" },
+        { scroll: "tourDates", name: "Tournée" },
+        { scroll: "newsPanel", name: "Blog" },
+        { scroll: "contact", name: "Contact" }]
     return (
         <nav className='nav'>
             <div className="nav__brand">
@@ -48,83 +71,52 @@ const Nav = () => {
 
             </div>
             <div className="nav__links">
-                <Link
-                    activeClass="active"
-                    to="hero"
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={500}
-                    key="Acceuil"
-                    className="nav__link">
-                    Accueil
-                </Link>
-                <Link
-                    activeClass="active"
-                    to="theStrokes"
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={500}
-                    key="Strokes"
-                    className="nav__link">
-                    The Strokes
-                </Link>
-                <Link
-                    activeClass="active"
-                    to="album"
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={500}
-                    key="Album"
-                    className="nav__link">
-                    Album
-                </Link>
-                <Link
-                    activeClass="active"
-                    to="tourDates"
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={500}
-                    key="tourDates"
-                    className="nav__link">
-                    Tournée
-                </Link>
-                <Link
-                    activeClass="active"
-                    to="newsPanel"
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={500}
-                    key="newsPanel"
-                    className="nav__link">
-                    Blog
-                </Link>
-                <Link
-                    activeClass="active"
-                    to="contact"
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={500}
-                    key="Contact"
-                    className="nav__link">
-                    Contact
-                </Link>
-
+                {linksData.map(link => (
+                    <Link
+                        activeClass="active"
+                        to={link.scroll}
+                        spy={true}
+                        smooth={true}
+                        offset={-60}
+                        duration={500}
+                        key={link.name}
+                        className="nav__link">
+                        {link.name}
+                    </Link>
+                ))}
             </div>
             <div className="nav__links-icons">
                 <FontAwesomeIcon className="icon" icon={faYoutube} title="Youtube" />
                 <FontAwesomeIcon className="icon" icon={faInstagram} title="Instagram" />
                 <FontAwesomeIcon className="icon" icon={faTwitter} title="Twitter" />
             </div>
-            <div className="nav__links-burger">
-                <FontAwesomeIcon icon={faBars} />
+            <div className={"nav__links-burger " + (burgerOn ? "change" : null)} onClick={handleBurger}>
+                <div className="bar1 burgerBars"></div>
+                <div className="bar2 burgerBars"></div>
+                <div className="bar3 burgerBars"></div>
             </div>
-
+            <div id="menuToggle">
+                <ul id="menu" className={burgerOn ? "changeMenu" : "hideMenu"}>
+                    {linksData.map(link => (
+                        <Link
+                            activeClass="active"
+                            to={link.scroll}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={500}
+                            key={link.name}
+                            className="nav__link menuLinks"
+                            onClick={() => {
+                                setBurger(false)
+                            }}>
+                            <li key={link.name}>
+                                {link.name}
+                            </li>
+                        </Link>
+                    ))}
+                </ul>
+            </div>
         </nav>
     );
 }

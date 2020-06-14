@@ -115,7 +115,12 @@ const News = ({ news, index }) => {
             })
 
         } else {
-
+            db.collection('news').doc(news.id).set({
+                titre: state.titre,
+                description: state.description,
+                image: state.image,
+                publishDate: state.publishDate,
+            })
         }
         setEditMode(false)
 
