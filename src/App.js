@@ -16,6 +16,7 @@ const App = () => {
     let active = false;
     const nav = document.querySelector('.nav')
     const burgerBars = document.querySelectorAll('.burgerBars')
+    const navIcons = document.querySelectorAll('.nav__links-icons a')
     const navBrand = document.querySelector('.nav__brand')
     console.log(burgerBars)
     window.addEventListener('scroll', () => {
@@ -28,6 +29,9 @@ const App = () => {
         burgerBars.forEach(bar => {
           bar.style.backgroundColor = "#fff"
         });
+        navIcons.forEach(icon => {
+          icon.style.color = "#fff"
+        });
       }
       if (active === false && window.scrollY >= 130) {
         active = true
@@ -37,6 +41,9 @@ const App = () => {
         nav.style.boxShadow = "0px 2px 5px 0px rgba(0, 0, 0, 0.75)"
         burgerBars.forEach(bar => {
           bar.style.backgroundColor = "#000"
+        });
+        navIcons.forEach(icon => {
+          icon.style.color = "#000"
         });
 
 

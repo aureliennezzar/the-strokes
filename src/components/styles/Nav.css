@@ -25,6 +25,11 @@ nav {
     padding: 10px;
 }
 
+.nav__links-icons a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
 /* nav * {
     border: 1px solid red;
 } */
@@ -71,6 +76,9 @@ nav {
 }
 
 @media screen and (max-width: 930px) {
+    .nav__brand {
+        width: 100%;
+    }
     .bar1, .bar2, .bar3 {
         transition: 0.4s;
     }
@@ -84,8 +92,9 @@ nav {
         visibility: visible;
     }
 }
-@media screen and (max-width: 550px) {
-    #menu{
+
+@media screen and (max-width: 825px) {
+    #menu {
         width: 80vw;
         padding: 50px 10vw;
     }

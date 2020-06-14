@@ -31,7 +31,7 @@ const Hero = () => {
     }
     return (
         <section className='hero'>
-            <video className="hero__video" loop infi autoPlay muted width="100%">
+            <video className="hero__video" loop infi="true" autoPlay muted playsInline width="100%">
 
                 <source src={video1}
                     type="video/mp4" />

@@ -28,8 +28,10 @@
     flex-direction: column;
     width: 100%;
 }
+
 .news__importantNews-imageCtnr img{
-    max-width: 50%;
+    width: 50%;
+    height: auto;
 }
 .news__news-imageCtnr{
     width: 50%;

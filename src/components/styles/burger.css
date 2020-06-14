@@ -16,6 +16,31 @@
     margin: 6px 0;
     border-radius: 5px;
 }
+
+/* .dot {
+    position: absolute;
+    height: 11px;
+    width: 9px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0;
+    transition: .5s;
+}
+.makeDot{
+    opacity: 1 !important;
+
+}
+.dotLeft {
+    -webkit-transform: rotate(-45deg) translate(27px, -29px);
+    transform: rotate(-45deg) translate(27px, -29px);
+
+}
+.dotRight{
+    -webkit-transform: rotate(45deg) translate(-9px, 6px);
+    transform: rotate(45deg) translate(-10px, -45px);
+
+} */
 .change .bar1 {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
@@ -29,8 +54,24 @@
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
 }
-.change .bar1,.change  .bar2,.change  .bar3 {
+
+.change .bar1, .change .bar2, .change .bar3 {
     background-color: black !important;
+}
+
+.navMenuIcons{
+    display: flex;
+    justify-content: center;
+    /* width: 100px !important; */
+    margin-top: 30px;
+}
+.navMenuIcons a{
+    color: #000;
+    padding-left: 30px;
+    transition: color .3s ease;
+}
+.navMenuIcons a:hover{
+    color: tomato;
 }
 
 /*
@@ -64,8 +105,6 @@
     color: tomato;
 }
 
-
-
 /*
   * Make this absolute positioned
   * at the top left of the screen
@@ -80,6 +119,7 @@
     background: #ededed;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
     /* to stop flickering of text in safari */
 }
 
@@ -88,6 +128,7 @@
     transform: translate(-100%, 0);
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 }
+
 .hideMenu {
     transform-origin: 0% 0%;
     transform: translate(100%, 0);

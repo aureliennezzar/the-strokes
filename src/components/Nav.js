@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link } from "react-scroll";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faYoutube, faTwitter } from "@fortawesome/fontawesome-free-brands";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import strokesLogo from '../assets/the-strokes-logo.png'
 import './styles/burger.css'
 import './styles/Nav.css'
 const cymbSound = new Audio("cymb.mp3")
@@ -11,7 +12,6 @@ const Nav = () => {
     const [count, setCount] = useState(0)
     const [burgerOn, setBurger] = useState(false)
     const [isBroke, setBroke] = useState(false)
-    const [brandTitle, setTitle] = useState("The Strokes")
 
     window.addEventListener("resize", () => {
 
@@ -29,7 +29,6 @@ const Nav = () => {
         const audio = document.createElement("audio")
         if (count === 10) {
             cymbSound.play()
-            setTitle('Bien joué !')
             setCount(count + 1)
         } else if (count < 10) {
             const audio = document.createElement("audio")
@@ -53,12 +52,15 @@ const Nav = () => {
         { scroll: "tourDates", name: "Tournée" },
         { scroll: "newsPanel", name: "Blog" },
         { scroll: "contact", name: "Contact" }]
+    const iconsData = [
+        { href: "https://www.youtube.fr", icon: faYoutube, title: "Youtube" },
+        { href: "https://www.instagram.com/", icon: faInstagram, title: "Instagram" },
+        { href: "https://twitter.com/home", icon: faTwitter, title: "Twitter" }]
     return (
         <nav className='nav'>
             <div className="nav__brand">
                 <Link
                     activeClass="active"
-                    to="hero__video"
                     spy={true}
                     smooth={true}
                     offset={0}
@@ -66,7 +68,7 @@ const Nav = () => {
                     key="Home"
                     className="nav__link"
                     onClick={playSound}>
-                    <h1>{brandTitle}</h1>
+                    <img src={strokesLogo}></img>
                 </Link>
 
             </div>
@@ -86,14 +88,23 @@ const Nav = () => {
                 ))}
             </div>
             <div className="nav__links-icons">
-                <FontAwesomeIcon className="icon" icon={faYoutube} title="Youtube" />
-                <FontAwesomeIcon className="icon" icon={faInstagram} title="Instagram" />
-                <FontAwesomeIcon className="icon" icon={faTwitter} title="Twitter" />
+                {iconsData.map(data => {
+                    const { href, title, icon } = data
+                    return (
+                        <a href={href} target="_blank" >
+                            <FontAwesomeIcon className="icon" icon={icon} title={title} />
+                        </a>
+                    )
+
+                })}
+
             </div>
             <div className={"nav__links-burger " + (burgerOn ? "change" : null)} onClick={handleBurger}>
                 <div className="bar1 burgerBars"></div>
                 <div className="bar2 burgerBars"></div>
                 <div className="bar3 burgerBars"></div>
+                {/* <span className={"dotLeft dot " + (burgerOn ? "makeDot" : null)}></span>
+                <span className={"dotRight dot " + (burgerOn ? "makeDot" : null)}></span> */}
             </div>
             <div id="menuToggle">
                 <ul id="menu" className={burgerOn ? "changeMenu" : "hideMenu"}>
@@ -115,9 +126,22 @@ const Nav = () => {
                             </li>
                         </Link>
                     ))}
+
+                    <li key='brandIcons' className="navMenuIcons">
+                        {iconsData.map(data => {
+                            const { href, title, icon } = data
+                            return (
+                                <a href={href} target="_blank" >
+                                    <FontAwesomeIcon className="icon" icon={icon} title={title} />
+                                </a>
+                            )
+
+                        })}
+
+                    </li>
                 </ul>
             </div>
-        </nav>
+        </nav >
     );
 }
 
