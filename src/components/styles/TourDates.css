@@ -25,52 +25,7 @@
     height: 90%;
 }
 
-.td__admin-panel-datesList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 100%;
-    height: 90%;
-    margin-top: 20px;
-    color: #000;
-}
 
-.adminpanel__header {
-    width: 100%;
-    height: auto;
-    color: #000;
-}
-
-.td__admin-panel-ctnr {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 60vw;
-    height: 60vh;
-    background: #fff;
-}
-
-.td__admin-panel-ctnr .adminpanel_title {
-    margin: 0;
-    padding: 0;
-    top: 40px;
-    font-size: 40px;
-}
-
-.tourDates__admin-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.877);
-    z-index: 20;
-}
 
 .tourDates .tourDates__title {
     margin: 0;

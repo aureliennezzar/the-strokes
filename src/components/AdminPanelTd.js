@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { db } from '../services/firebase';
 import Event from './Event';
+import './styles/AdminPanelTd.css'
 const AdminPanelTd = (props) => {
     const { handleClick } = props
     const [events, setEvents] = useState([]);
     const [newEvent, setNewEvent] = useState(false)
+    const [btnCtnrStyle, setBtnCtnrStyle] = useState({})
     const [state, setState] = useState({
         salle: "",
         ville: "",
@@ -27,6 +31,8 @@ const AdminPanelTd = (props) => {
         })
     }
     const handleAdd = () => {
+        const elmnt = document.querySelector('.datelist-ctnr');
+        elmnt.scrollTop = 0
         setNewEvent(true)
     }
     const handleAbort = () => {
@@ -57,10 +63,16 @@ const AdminPanelTd = (props) => {
 
                 <div className="adminpanel__header">
                     <h1 className="adminpanel__title">Modifier tournée</h1>
-                    <button onClick={handleAdd}>Ajouter un évènement</button>
+                    <div className="addCtnr" onClick={handleAdd}>
+                        <div className="plus-circle">
+                            <span className="plus-bar1 plus-bars"></span>
+                            <span className="plus-bar2 plus-bars"></span>
+                        </div>
+                        <p style={{ margin: "0", marginTop: "3px" }}>Ajouter un évènement</p>
+                    </div>
                 </div>
 
-                <div style={{
+                <div className="datelist-ctnr" style={{
                     width: "100%",
                     height: "100%",
                     overflow: "auto"
@@ -71,9 +83,9 @@ const AdminPanelTd = (props) => {
                             <li className="event-ctnr">
                                 <div className="event-header">
                                     {"Nouvel évènement".toUpperCase()}
-                                    <div className="event-header__btnCtnr">
-                                        <button onClick={handleConfirm}>Confirmer</button>
-                                        <button onClick={handleAbort}>Annuler</button>
+                                    <div style={btnCtnrStyle} className="event-header__btnCtnr">
+                                        <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleConfirm} />
+                                        <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbort} />
                                     </div>
                                 </div>
                                 <div className="event-body">
@@ -87,15 +99,18 @@ const AdminPanelTd = (props) => {
                                         <option value="2">Festival</option>
                                     </select>
                                     <input placeholder="Lien boutique" name="lien" onChange={handleChange} value={state.lien}></input>
-                                    
+
                                 </div>
                             </li>
                             : null}
 
                         {events.map((event, i) => (
-                                <Event event={event} index={i} />
+                            <Event event={event} index={i} newEvent={newEvent} />
                         ))}
                     </ul>
+                </div>
+                <div className="td__admin-panel-cross" onClick={handleClick} >
+                    <FontAwesomeIcon icon={faTimes} />
                 </div>
             </div>
         </div>

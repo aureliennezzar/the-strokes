@@ -1,0 +1,120 @@
+.td__admin-panel-datesList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    height: 90%;
+    margin-top: 20px;
+    color: #000;
+}
+
+.adminpanel__header {
+    width: 100%;
+    height: auto;
+    color: #000;
+    text-align: center;
+}
+
+.adminpanel__header h1 {
+    text-transform: uppercase;
+}
+
+.td__admin-panel-ctnr {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 60vw;
+    height: 60vh;
+    background: #fff;
+}
+
+.td__admin-panel-ctnr .adminpanel_title {
+    margin: 0;
+    padding: 0;
+    top: 40px;
+    font-size: 40px;
+}
+
+.tourDates__admin-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.877);
+    z-index: 20;
+}
+.td__admin-panel-cross{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    transition: .2s;
+    cursor: pointer;
+}
+.td__admin-panel-cross svg{
+    font-size: 20px;
+    padding: 2px;
+    color: #000;
+}
+.td__admin-panel-cross:hover{
+    background: rgba(0, 0, 0, 0.239);
+}
+.addCtnr {
+    display: flex;
+    width: 195px;
+    justify-content: space-between;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.plus-circle {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    border: 2px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.plus-bars {
+    width: 2px;
+    height: 17px;
+    color: black;
+    background-color: black;
+    transition: .2s;
+}
+.addCtnr:hover .plus-bars{
+    background-color: tomato;
+}
+.addCtnr:hover .plus-circle{
+    border: 2px solid tomato;
+}
+.plus-circle:hover {
+    border: 2px solid tomato;
+}
+
+.plus-circle:hover .plus-bars {
+    background-color: tomato;
+}
+
+.plus-bar1 {
+    -webkit-transform: rotate(90deg) translate(4px, -17px);
+    transform: rotate(90deg) translate(4px, -11px);
+}
+
+.plus-bar2 {
+    -webkit-transform: translate(13px, 4px);
+    transform: translate(9px, 4px);
+}

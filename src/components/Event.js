@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Fade from 'react-reveal/Fade';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import './styles/Event.css'
 import { db } from '../services/firebase';
 
-const Event = ({ event, index }) => {
+const Event = ({ event, index, newEvent }) => {
     const [title, setTitle] = useState(`Evènement ${index + 1}`)
     const [salle, setSalle] = useState(event.salle)
     const [ville, setVille] = useState(event.ville)
@@ -14,7 +16,7 @@ const Event = ({ event, index }) => {
     const [eventStyle, setEventStyle] = useState({})
     const [editMode, setEditMode] = useState(false)
     const [confirm, setConfirm] = useState(false)
-
+    const [btnCtnrStyle, setBtnCtnrStyle] = useState({})
     const handleDelete = (e) => {
         setConfirm(true)
     }
@@ -23,6 +25,7 @@ const Event = ({ event, index }) => {
         setEventStyle({})
         setTitle(`Evènement ${index + 1}`)
         setEditMode(false)
+        setBtnCtnrStyle({})
     }
     const handleModify = (e) => {
         setDisabled(false)
@@ -45,6 +48,7 @@ const Event = ({ event, index }) => {
             type
         })
         setEditMode(false)
+        setBtnCtnrStyle({})
 
     }
     return (
@@ -55,23 +59,25 @@ const Event = ({ event, index }) => {
                     : title.toUpperCase()
                 }
 
-                <div className="event-header__btnCtnr">
+                <div style={btnCtnrStyle} className="event-header__btnCtnr">
                     {confirm
 
-                        ? <button onClick={() => {
+                        ? <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={() => {
                             db.collection("tour-dates").doc(event.id).delete()
                             setConfirm(false)
-                        }}>Oui</button>
-                        : <button onClick={handleDelete}>Supprimer</button>}
+                        }} />
+                        : editMode
+                            ? null
+                            : <FontAwesomeIcon className="event-icons" icon={faTrash} onClick={handleDelete} />}
 
                     {confirm
-                        ? <button onClick={() => setConfirm(false)}>Non</button>
+                        ? <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={() => setConfirm(false)} />
                         : editMode
                             ? <>
-                                <button onClick={handleSaveEdit}>Sauver</button>
-                                <button onClick={handleAbortEdit}>Annuler</button>
+                                <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleSaveEdit} />
+                                <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbortEdit} />
                             </>
-                            : <button onClick={handleModify}>Modifier</button>
+                            : <FontAwesomeIcon className="event-icons" icon={faPen} onClick={handleModify} />
                     }
 
 
