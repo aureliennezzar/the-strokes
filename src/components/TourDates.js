@@ -13,7 +13,6 @@ const TourDates = () => {
     const [switchChecked, setSwitch] = useState(false)
     const tourDatesRef = db.collection("tour-dates")
     let isAdmin = useContext(RoleContext)
-    console.log(isAdmin);
     const handleChange = () => {
         setSwitch(!switchChecked)
     }
@@ -86,9 +85,9 @@ const TourDates = () => {
                 </ul>
                 <div className="switchCtnr">
                     <p>Concert</p>
-                    <label class="switch">
+                    <label className="switch">
                         <input type="checkbox" checked={switchChecked} onChange={handleChange} />
-                        <span class="slider"></span>
+                        <span className="slider"></span>
                     </label>
                     <p>Festival</p>
                 </div>

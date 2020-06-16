@@ -1,5 +1,4 @@
-
-.news__admin-panel{
+.news__admin-panel {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +10,8 @@
     z-index: 20;
     color: #000;
 }
-.news__admin-panel-datesList{
+
+.news__admin-panel-datesList {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,30 +22,41 @@
     height: 90%;
     margin-top: 20px;
 }
-.news__adminpanel__header{
+
+.news__adminpanel__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0 20px 0;
     width: 100%;
-    height: auto;
+    height: 140px;
 }
-.news__admin-panel-ctnr{
+
+.news__admin-panel-ctnr {
     display: flex;
     position: relative;
     flex-direction: column;
     width: 60vw;
-    height: 60vh;
+    height: 80vh;
     background: #fff;
 }
-.news__admin-panel-ctnr .news__adminpanel__title{
+
+.news__admin-panel-ctnr .news__adminpanel__title {
     margin: 0;
     padding: 0;
     top: 40px;
     font-size: 40px;
+    text-align: center;
 }
-.news__dates-list{
+
+.news__dates-list {
     list-style: none;
 }
-.news__dates-list li{
+
+.news__dates-list li {
     padding: 50px;
 }
+
 .label-file {
     cursor: pointer;
     background: rgb(56, 56, 56);

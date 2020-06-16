@@ -6,40 +6,75 @@ import './styles/Event.css'
 import { db } from '../services/firebase';
 
 const Event = ({ event, index, newEvent }) => {
-    const [title, setTitle] = useState(`Evènement ${index + 1}`)
-    const [salle, setSalle] = useState(event.salle)
-    const [ville, setVille] = useState(event.ville)
-    const [time, setTime] = useState(event.time)
-    const [lien, setLien] = useState(event.lien)
-    const [type, setType] = useState(event.type)
-    const [disabled, setDisabled] = useState(true)
-    const [eventStyle, setEventStyle] = useState({})
-    const [editMode, setEditMode] = useState(false)
-    const [confirm, setConfirm] = useState(false)
-    const [btnCtnrStyle, setBtnCtnrStyle] = useState({})
+    const [state, setState] = useState({
+        title: "Evènement ",
+        salle: event.salle,
+        ville: event.ville,
+        time: event.time,
+        lien: event.lien,
+        type: event.type,
+        disabled: true,
+        editMode: false,
+        confirm: false
+    })
+    const [styles, setStyles] = useState({
+        eventStyle: {}
+    })
+    const { title, salle, ville, time, lien, type, disabled, editMode, confirm } = state
+    const { eventStyle } = styles
+
+    
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+    }
     const handleDelete = (e) => {
-        setConfirm(true)
+        setState({
+            ...state,
+            confirm: true
+        })
     }
     const handleAbortEdit = (e) => {
-        setDisabled(true)
-        setEventStyle({})
-        setTitle(`Evènement ${index + 1}`)
-        setEditMode(false)
-        setBtnCtnrStyle({})
+        setState({
+            ...state,
+            title: "Evènement ",
+            disabled: true,
+            editMode: false,
+        })
+        setStyles({
+            ...styles,
+            eventStyle: {}
+        })
     }
     const handleModify = (e) => {
-        setDisabled(false)
-        setEventStyle({
-            boxShadow: "0 0 0 2px black"
+        setState({
+            ...state,
+            title: "Modification evènement ",
+            disabled: false,
+            editMode: true,
         })
-        setTitle(`Modification evènement ${index + 1}`)
-        setEditMode(true)
+        setStyles({
+            ...styles,
+            eventStyle: {
+                boxShadow: "0 0 0 2px black"
+            }
+        })
 
     }
     const handleSaveEdit = () => {
-        setDisabled(true)
-        setEventStyle({})
-        setTitle(`Evènement ${index + 1}`)
+
+        setState({
+            ...state,
+            title: "Evènement ",
+            disabled: true,
+            editMode: false
+        })
+        setStyles({
+            ...styles,
+            eventStyle: {}
+        })
         db.collection('tour-dates').doc(event.id).set({
             salle,
             ville,
@@ -47,31 +82,35 @@ const Event = ({ event, index, newEvent }) => {
             lien,
             type
         })
-        setEditMode(false)
-        setBtnCtnrStyle({})
-
     }
     return (
-        <li style={eventStyle} key={event.id} className="event-ctnr">
+        <li style={eventStyle} className="event-ctnr">
             <div className="event-header">
                 {confirm
                     ? "êtes-vous sur de vouloir faire ca ?".toUpperCase()
-                    : title.toUpperCase()
+                    : `${title} ${index + 1}`.toUpperCase()
                 }
 
-                <div style={btnCtnrStyle} className="event-header__btnCtnr">
+                <div className="event-header__btnCtnr">
                     {confirm
 
                         ? <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={() => {
                             db.collection("tour-dates").doc(event.id).delete()
-                            setConfirm(false)
+                            setState({
+                                ...state,
+                                confirm: false
+                            })
                         }} />
                         : editMode
                             ? null
                             : <FontAwesomeIcon className="event-icons" icon={faTrash} onClick={handleDelete} />}
 
                     {confirm
-                        ? <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={() => setConfirm(false)} />
+                        ? <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={() =>
+                            setState({
+                                ...state,
+                                confirm: false
+                            })} />
                         : editMode
                             ? <>
                                 <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleSaveEdit} />
@@ -87,40 +126,36 @@ const Event = ({ event, index, newEvent }) => {
             <div className="event-body">
                 <input
                     disabled={disabled}
-                    onChange={e => {
-                        setSalle(e.target.value)
-                    }}
+                    name="salle"
+                    onChange={handleChange}
                     value={salle} ></input>
 
                 <input
                     disabled={disabled}
-                    onChange={e => {
-                        setVille(e.target.value)
-                    }}
+                    name="ville"
+                    onChange={handleChange}
                     value={ville} ></input>
 
                 <input
                     disabled={disabled}
-                    onChange={e => {
-                        setTime(e.target.value)
-                    }}
+                    name="time"
+                    onChange={handleChange}
                     type='date'
                     value={time} ></input>
 
                 <select
                     disabled={disabled}
-                    onChange={e => {
-                        setType(e.target.value)
-                    }} defaultValue={type}>
+                    name="type"
+                    onChange={handleChange}
+                     defaultValue={type}>
                     <option value={0}>Type</option>
                     <option value={1}>Concert</option>
                     <option value={2}>Festival</option>
                 </select>
                 <input
                     disabled={disabled}
-                    onChange={e => {
-                        setLien(e.target.value)
-                    }}
+                    name="lien"
+                    onChange={handleChange}
                     value={lien} ></input>
 
             </div>

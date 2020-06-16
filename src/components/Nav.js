@@ -18,7 +18,6 @@ const Nav = () => {
         // Get width and height of the window excluding scrollbars
         var w = document.documentElement.clientWidth;
         var h = document.documentElement.clientHeight;
-        console.log(w, h);
         if (w > 930) {
             setBurger(false)
         }

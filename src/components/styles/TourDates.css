@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     background-image: url("../../assets/tourdates.png");
     background-size: cover;
     /* <------ */
@@ -22,7 +22,7 @@
     right: 10%;
     top: 10%;
     width: 400px;
-    height: 90%;
+    min-height: calc(100vh - 100px);
 }
 
 
@@ -70,7 +70,7 @@
     font-size: 15px;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width:930px) {
     .tourDates {
         align-items: center;
     }
@@ -84,7 +84,6 @@
     .tourDates__dates-ctnr {
         position: relative;
         width: 100%;
-        height: 100%;
         right: 0;
         top: 0;
     }

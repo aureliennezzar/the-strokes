@@ -5,6 +5,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import News from './News';
 import { makeStyles } from '@material-ui/core/styles';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -25,7 +27,7 @@ const AdminPanelNews = (props) => {
         publishDate: "",
         description: "",
         image: "",
-        important: false
+        important: false,
     })
 
     useEffect(() => {
@@ -91,7 +93,13 @@ const AdminPanelNews = (props) => {
 
                 <div className="news__adminpanel__header">
                     <h1 className="news__adminpanel__title">Modifier Actualités</h1>
-                    <button onClick={handleAdd}>Ajouter une actualité</button>
+                    <div className="addCtnr" onClick={handleAdd}>
+                        <div className="plus-circle">
+                            <span className="plus-bar1 plus-bars"></span>
+                            <span className="plus-bar2 plus-bars"></span>
+                        </div>
+                        <p style={{ margin: "0", marginTop: "3px" }}>Ajouter une actualité</p>
+                    </div>
                 </div>
 
                 <div style={{
@@ -104,10 +112,11 @@ const AdminPanelNews = (props) => {
                             ?
                             <li className="news-ctnr">
                                 <div className="news-header">
+
                                     {"Nouvel actualité".toUpperCase()}
-                                    <div className="news-header__btnCtnr">
-                                        <button onClick={handleConfirm}>Confirmer</button>
-                                        <button onClick={handleAbort}>Annuler</button>
+                                    <div style={{ width: "40px" }} className="news-header__btnCtnr">
+                                        <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleConfirm} />
+                                        <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbort} />
                                     </div>
                                 </div>
                                 <div className="news-body">
@@ -116,7 +125,7 @@ const AdminPanelNews = (props) => {
                                     <textarea style={{ resize: "none" }} placeholder="Description" rows="5" cols="60" name="description" onChange={handleChange} value={state.description}>
 
                                     </textarea><br></br>
-                                    <label for="file" className="label-file">Ajouter / Modifier l'image</label>
+                                    <label htmlFor="file" className="label-file">Ajouter / Modifier l'image</label>
                                     <input id="file" className="input-file" type="file" accept="image/*" onChange={handleUpload}></input>
                                 </div>
 
@@ -129,10 +138,13 @@ const AdminPanelNews = (props) => {
                                 </div>
                             </li>
                             : null}
-                        {news.map((data, i) => (
-                            <News news={data} index={i} />
-                        ))}
+                        {news.map((data, i) => {
+                            return <News key={data.id} news={data} index={i} isImportant={data.important} />
+                        })}
                     </ul>
+                </div>
+                <div className="td__admin-panel-cross" onClick={handleClick} >
+                    <FontAwesomeIcon icon={faTimes} />
                 </div>
             </div>
 

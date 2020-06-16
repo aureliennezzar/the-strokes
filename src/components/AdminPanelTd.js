@@ -15,12 +15,33 @@ const AdminPanelTd = (props) => {
         time: "",
         lien: "",
         type: 0,
+        noEvents: false,
+        datelistStyle: {}
     })
+    const { salle, time, ville, type, lien, noEvents, datelistStyle } = state
 
     useEffect(() => {
         return db.collection('tour-dates').onSnapshot((snapshot) => {
             const eventsData = []
             snapshot.forEach(doc => eventsData.push(({ ...doc.data(), id: doc.id })))
+            if (eventsData.length === 0) {
+                setState({
+                    ...state,
+                    noEvents: true,
+                    datelistStyle: {
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "black"
+                    }
+                })
+            } else {
+                setState({
+                    ...state,
+                    noEvents: false,
+                    datelistStyle: {}
+                })
+            }
             setEvents(eventsData)
         })
     }, [])
@@ -39,7 +60,6 @@ const AdminPanelTd = (props) => {
         setNewEvent(false)
     }
     const handleConfirm = () => {
-        const { salle, time, ville, type, lien } = state
         db.collection("tour-dates").add({
             salle,
             ville,
@@ -75,39 +95,43 @@ const AdminPanelTd = (props) => {
                 <div className="datelist-ctnr" style={{
                     width: "100%",
                     height: "100%",
-                    overflow: "auto"
+                    overflow: "auto",
+                    ...datelistStyle
                 }}>
-                    <ul className="td__admin-panel-datesList">
-                        {newEvent
-                            ?
-                            <li className="event-ctnr">
-                                <div className="event-header">
-                                    {"Nouvel évènement".toUpperCase()}
-                                    <div style={btnCtnrStyle} className="event-header__btnCtnr">
-                                        <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleConfirm} />
-                                        <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbort} />
+                    {noEvents&&newEvent===false
+                        ? <h1>Aucun évènements !</h1>
+                        : <ul className="td__admin-panel-datesList">
+                            {newEvent
+                                ?
+                                <li className="event-ctnr">
+                                    <div className="event-header">
+                                        {"Nouvel évènement".toUpperCase()}
+                                        <div style={btnCtnrStyle} className="event-header__btnCtnr">
+                                            <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleConfirm} />
+                                            <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbort} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="event-body">
-                                    <input placeholder="Salle" name="salle" onChange={handleChange} value={state.salle}></input>
-                                    <input placeholder="Ville" name="ville" onChange={handleChange} value={state.ville}></input>
-                                    <input placeholder="Date" name="time" type="date" onChange={handleChange} value={state.time}></input>
+                                    <div className="event-body">
+                                        <input placeholder="Salle" name="salle" onChange={handleChange} value={state.salle}></input>
+                                        <input placeholder="Ville" name="ville" onChange={handleChange} value={state.ville}></input>
+                                        <input placeholder="Date" name="time" type="date" onChange={handleChange} value={state.time}></input>
 
-                                    <select name="type" value={state.type} onChange={handleChange}>
-                                        <option value="0">Type</option>
-                                        <option value="1">Concert</option>
-                                        <option value="2">Festival</option>
-                                    </select>
-                                    <input placeholder="Lien boutique" name="lien" onChange={handleChange} value={state.lien}></input>
+                                        <select name="type" value={state.type} onChange={handleChange}>
+                                            <option value="0">Type</option>
+                                            <option value="1">Concert</option>
+                                            <option value="2">Festival</option>
+                                        </select>
+                                        <input placeholder="Lien boutique" name="lien" onChange={handleChange} value={state.lien}></input>
 
-                                </div>
-                            </li>
-                            : null}
+                                    </div>
+                                </li>
+                                : null}
 
-                        {events.map((event, i) => (
-                            <Event event={event} index={i} newEvent={newEvent} />
-                        ))}
-                    </ul>
+                            {events.map((event, i) => (
+                                <Event key={event.id} event={event} index={i} newEvent={newEvent} />
+                            ))}
+                        </ul>
+                    }
                 </div>
                 <div className="td__admin-panel-cross" onClick={handleClick} >
                     <FontAwesomeIcon icon={faTimes} />

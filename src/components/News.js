@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Fade from 'react-reveal/Fade';
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import './styles/News.css'
 import { db, storageRef } from '../services/firebase';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import fullstar from '../assets/fullStar.svg'
+import emptystar from '../assets/emptyStar.svg'
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -14,29 +16,37 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
     },
 }));
-const News = ({ news, index }) => {
+const News = ({ news, index, isImportant }) => {
     const classes = useStyles();
-    const {
-        titre,
-        description,
-        publishDate,
-        image,
-        important } = news
-    const [state, setState] = useState({
-        titre,
-        description,
-        publishDate,
-        image,
-        important
-    })
 
-    const [open, setOpen] = useState(false);
-    const [titreActu, setTitreActu] = useState(`Actualité ${index + 1}`)
-    const [disabled, setDisabled] = useState(true)
-    const [newsStyle, setNewsStyle] = useState({})
-    const [editMode, setEditMode] = useState(false)
-    const [confirm, setConfirm] = useState(false)
-    const [dateChanged, setDateChanged] = useState(false)
+    const [state, setState] = useState({
+        titre: news.titre,
+        description: news.description,
+        publishDate: news.publishDate,
+        image: news.image,
+        important: news.important,
+        titreActu: "Actualité ",
+        open: false,
+        disabled: true,
+        editMode: false,
+        confirm: false,
+        dateChanged: false,
+        newsStyle: {},
+        btnCtnrStyle: {}
+    })
+    const { titre,
+        description,
+        publishDate,
+        image,
+        important,
+        titreActu,
+        open,
+        disabled,
+        editMode,
+        confirm,
+        dateChanged,
+        newsStyle,
+        btnCtnrStyle } = state
 
     const handleChange = (e) => {
         setState({
@@ -45,16 +55,17 @@ const News = ({ news, index }) => {
         })
     }
     const handleChangeDate = (e) => {
-        setDateChanged(true)
         setState({
             ...state,
+            dateChanged: true,
             [e.target.name]: e.target.value
         })
     }
 
     const handleUpload = (e) => {
-        console.log(e.target.files[0])
-        setOpen(true)
+        setState({
+            open: true
+        })
         const file = e.target.files[0]
         const name = new Date() + '-' + file.name
         const metadata = {
@@ -65,92 +76,118 @@ const News = ({ news, index }) => {
             .then(image => {
                 setState({
                     ...state,
-                    image
+                    image,
+                    open: false
                 })
-                setOpen(false)
             })
     }
     const handleDelete = (e) => {
-        setConfirm(true)
+        setState({
+            ...state,
+            confirm: true,
+            btnCtnrStyle: { width: "40px" }
+        })
     }
     const handleFavourite = (e) => {
-        console.log(news.id);
         db.collection("news").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 db.collection('news').doc(doc.id).update({
                     important: false
                 }).then(
                     db.collection('news').doc(news.id).update({
-                        important: !important
+                        important: !isImportant
                     }))
             });
         });
     }
     const handleAbortEdit = (e) => {
-        setDisabled(true)
-        setNewsStyle({})
-        setTitreActu(`Actualité ${index + 1}`)
-        setEditMode(false)
+        setState({
+            ...state,
+            disabled: true,
+            editMode: false,
+            titreActu: "Actualité ",
+            newsStyle: {},
+            btnCtnrStyle: {}
+        })
     }
     const handleModify = (e) => {
-        setDisabled(false)
-        setNewsStyle({
-            boxShadow: "0 0 0 2px black"
+        setState({
+            ...state,
+            disabled: false,
+            editMode: true,
+            titreActu: "Modification actualité ",
+            newsStyle: {
+                boxShadow: "0 0 0 2px black"
+            },
+            btnCtnrStyle: { width: "40px" }
         })
-        setTitreActu(`Modification actualité ${index + 1}`)
-        setEditMode(true)
-
     }
     const handleSaveEdit = () => {
-        setDisabled(true)
-        setNewsStyle({})
-        setTitreActu(`Actualité ${index + 1}`)
+        setState({
+            ...state,
+            disabled: true,
+            editMode: false,
+            titreActu: "Actualité ",
+            newsStyle: {},
+            btnCtnrStyle: {}
+        })
         if (dateChanged) {
             db.collection("news").doc(news.id).delete()
-            db.collection('news').doc(`news-${state.publishDate}`).set({
-                titre: state.titre,
-                description: state.description,
-                image: state.image,
-                publishDate: state.publishDate,
+            db.collection('news').doc(`news-${publishDate}`).set({
+                titre: titre,
+                description: description,
+                image: image,
+                publishDate: publishDate,
             })
 
         } else {
             db.collection('news').doc(news.id).set({
-                titre: state.titre,
-                description: state.description,
-                image: state.image,
-                publishDate: state.publishDate,
+                titre: titre,
+                description: description,
+                image: image,
+                publishDate: publishDate,
             })
         }
-        setEditMode(false)
-
     }
     return (
-        <li style={newsStyle} key={news.id} className="news-ctnr">
+        <li style={newsStyle} className="news-ctnr">
             <div className="news-header">
                 {confirm
                     ? "êtes-vous sur de vouloir faire ca ?".toUpperCase()
-                    : titreActu.toUpperCase()
+                    : `${titreActu} ${index + 1}`.toUpperCase()
                 }
 
-                <div className="news-header__btnCtnr">
-                    <button onClick={handleFavourite}>{important ? "important" : "not important"}</button>
+                <div style={btnCtnrStyle} className="news-header__btnCtnr">
+
                     {confirm
 
-                        ? <button onClick={() => {
+                        ? <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={() => {
                             db.collection("news").doc(news.id).delete()
-                            setConfirm(false)
-                        }}>Oui</button>
-                        : <button onClick={handleDelete}>Supprimer</button>}
+                            setState({
+                                ...state,
+                                confirm: false
+                            })
+                        }} />
+                        : editMode
+                            ? null :
+                            <>
+                                <div className="starCtnr" onClick={handleFavourite}>{isImportant ? <img className="starImage star" src={fullstar}></img> : <img className="emptyStarImage star" src={emptystar}></img>}</div>
+                                <FontAwesomeIcon className="event-icons" icon={faTrash} onClick={handleDelete} />
+                            </>}
 
                     {confirm
-                        ? <button onClick={() => setConfirm(false)}>Non</button>
+                        ? <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={() =>
+                            setState({
+                                ...state,
+                                confirm: false,
+                                btnCtnrStyle: {}
+                            })} />
                         : editMode
                             ? <>
-                                <button onClick={handleSaveEdit}>Sauver</button>
-                                <button onClick={handleAbortEdit}>Annuler</button>
+                                <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleSaveEdit} />
+                                <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbortEdit} />
                             </>
-                            : <button onClick={handleModify}>Modifier</button>
+                            : <FontAwesomeIcon className="event-icons" icon={faPen} onClick={handleModify} />
                     }
 
 
@@ -162,20 +199,20 @@ const News = ({ news, index }) => {
                     disabled={disabled}
                     onChange={handleChange}
                     name="titre"
-                    value={state.titre} ></input>
+                    value={titre} ></input>
 
                 <input
                     disabled={disabled}
                     onChange={handleChangeDate}
                     type='date'
                     name="publishDate"
-                    value={state.publishDate} ></input>
+                    value={publishDate} ></input>
                 <textarea style={{ resize: "none" }}
                     disabled={disabled}
                     rows="5" cols="60"
                     onChange={handleChange}
                     name="description"
-                    value={state.description} >
+                    value={description} >
                 </textarea><br></br>
 
 
@@ -204,7 +241,7 @@ const News = ({ news, index }) => {
             <div className="news-body2">
                 <div className="news-imageCtnr">
                     {image.length > 0
-                        ? <img src={state.image}></img>
+                        ? <img src={image}></img>
                         : "Pas d'image"}
                 </div>
             </div>

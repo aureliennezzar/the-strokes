@@ -29,7 +29,8 @@ const NewsPanel = () => {
     const handleClick = (e) => {
         const overlay = document.querySelector('.news__admin-panel')
         const modify = document.querySelector('.news__modify')
-        if (e.target == overlay || e.target == modify) {
+        const cross = document.querySelector('.td__admin-panel-cross')
+        if (e.target == overlay || e.target == modify|| e.currentTarget == cross) {
             setOverlay(!showOverlay)
         }
     }
