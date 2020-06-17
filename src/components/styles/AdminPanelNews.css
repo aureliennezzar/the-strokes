@@ -36,7 +36,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    width: 60vw;
+    width: 80%;
     height: 80vh;
     background: #fff;
 }

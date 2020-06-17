@@ -10,6 +10,7 @@ import NewsPanel from './components/NewsPanel';
 import { RoleContext } from './contexts/RoleContext';
 import Strokes from './components/Strokes';
 import Album from './components/Album';
+import Showcase from './components/Showcase';
 
 const App = () => {
   document.addEventListener("DOMContentLoaded", function () {
@@ -32,8 +33,8 @@ const App = () => {
         navIcons.forEach(icon => {
           icon.style.color = "#fff"
         });
-      }
-      if (active === false && window.scrollY >= 130) {
+        setScrolled(false)
+      } else if (active === false && window.scrollY >= 130) {
         active = true
         nav.style.background = "#fff"
         nav.style.color = "#000"
@@ -45,8 +46,7 @@ const App = () => {
         navIcons.forEach(icon => {
           icon.style.color = "#000"
         });
-
-
+        setScrolled(true)
       }
     });
     // this function runs when the DOM is ready, i.e. when the document has been parsed
@@ -59,6 +59,7 @@ const App = () => {
     }, 100); // check every 100ms
   });
   const [isAdmin, setRole] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     auth().onAuthStateChanged(function (user) {
       if (user) {
@@ -72,12 +73,13 @@ const App = () => {
     <div className="App">
       <RoleContext.Provider value={isAdmin}>
         <header>
-          <Nav />
+          <Nav scrolled={scrolled}/>
         </header>
         <main>
           <Hero />
           <Strokes />
           <Album />
+          <Showcase />
           <TourDates />
           <NewsPanel />
         </main>

@@ -25,6 +25,7 @@ const News = ({ news, index, isImportant }) => {
         publishDate: news.publishDate,
         image: news.image,
         important: news.important,
+        subtitle: news.subtitle,
         titreActu: "Actualité ",
         open: false,
         disabled: true,
@@ -39,6 +40,7 @@ const News = ({ news, index, isImportant }) => {
         publishDate,
         image,
         important,
+        subtitle,
         titreActu,
         open,
         disabled,
@@ -134,18 +136,20 @@ const News = ({ news, index, isImportant }) => {
         if (dateChanged) {
             db.collection("news").doc(news.id).delete()
             db.collection('news').doc(`news-${publishDate}`).set({
-                titre: titre,
-                description: description,
-                image: image,
-                publishDate: publishDate,
+                titre,
+                description,
+                image,
+                publishDate,
+                subtitle
             })
 
         } else {
             db.collection('news').doc(news.id).set({
-                titre: titre,
-                description: description,
-                image: image,
-                publishDate: publishDate,
+                titre,
+                description,
+                image,
+                publishDate,
+                subtitle
             })
         }
     }
@@ -200,6 +204,11 @@ const News = ({ news, index, isImportant }) => {
                     onChange={handleChange}
                     name="titre"
                     value={titre} ></input>
+                <input
+                    disabled={disabled}
+                    onChange={handleChange}
+                    name="subtitle"
+                    value={subtitle} ></input>
 
                 <input
                     disabled={disabled}

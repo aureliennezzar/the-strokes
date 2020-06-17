@@ -26,6 +26,7 @@
 .news__importantNews-imageCtnr{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
@@ -34,7 +35,7 @@
     height: auto;
 }
 .news__news-imageCtnr{
-    width: 50%;
+    min-width: 50%;
     height: 50%;
     padding: 24px 24px 24px 0;
 }
@@ -46,10 +47,11 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 .news__news-body{
     display: flex;
+    align-items: center;
     width: 80%;
     height: 50%;
 }

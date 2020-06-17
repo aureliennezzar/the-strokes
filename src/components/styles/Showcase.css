@@ -1,0 +1,28 @@
+.showcase{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    color: #fff;
+    object-fit: cover;
+}
+.showcase button{
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translate(-50%, 0) !important;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: Jura;
+    font-size: 15px;
+    padding: 15px 35px;
+    background: #01AC93;
+    border: 1px solid #01AC93;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.showcase img{
+    width: 100%;
+    height: 100%;
+}

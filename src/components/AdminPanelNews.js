@@ -28,6 +28,7 @@ const AdminPanelNews = (props) => {
         description: "",
         image: "",
         important: false,
+        subtitle: "",
     })
 
     useEffect(() => {
@@ -68,21 +69,23 @@ const AdminPanelNews = (props) => {
         setNewNews(false)
     }
     const handleConfirm = () => {
-        const { titre, description, image, publishDate, important } = state
+        const { titre, description, image, publishDate, important, subtitle } = state
 
         db.collection("news").doc(`news-${publishDate}`).set({
             titre,
             description,
             image,
             publishDate,
-            important
+            important,
+            subtitle
         })
         setState({
             titre: "",
             publishDate: "",
             description: "",
             image: "",
-            important: false
+            important: false,
+            subtitle: ""
         })
         setNewNews(false)
     }
@@ -121,6 +124,7 @@ const AdminPanelNews = (props) => {
                                 </div>
                                 <div className="news-body">
                                     <input placeholder="Titre de l'actualité" name="titre" onChange={handleChange} value={state.titre}></input>
+                                    <input placeholder="Sous-titre" name="subtitle" onChange={handleChange} value={state.subtitle}></input>
                                     <input placeholder="Date" name="publishDate" type="date" onChange={handleChange} value={state.publishDate}></input><br></br>
                                     <textarea style={{ resize: "none" }} placeholder="Description" rows="5" cols="60" name="description" onChange={handleChange} value={state.description}>
 
@@ -138,9 +142,9 @@ const AdminPanelNews = (props) => {
                                 </div>
                             </li>
                             : null}
-                        {news.map((data, i) => {
-                            return <News key={data.id} news={data} index={i} isImportant={data.important} />
-                        })}
+                            {news.map((data, i) => {
+                                return <News key={data.id} news={data} index={i} isImportant={data.important} />
+                            })}
                     </ul>
                 </div>
                 <div className="td__admin-panel-cross" onClick={handleClick} >

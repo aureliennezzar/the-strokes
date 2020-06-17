@@ -1,18 +1,57 @@
 import React, { useState } from 'react';
 import { Link } from "react-scroll";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faYoutube, faTwitter } from "@fortawesome/fontawesome-free-brands";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import strokesLogo from '../assets/the-strokes-logo.png'
+import strokesLogoBlack from '../assets/the-strokes-logo-black.svg'
+import strokesLogoWhite from '../assets/the-strokes-logo-white.svg'
+import crowdImage from '../assets/crowd-at-concert.jpg'
 import './styles/burger.css'
+import './styles/concours.css'
 import './styles/Nav.css'
+
+
+const useStyles = makeStyles((theme) => ({
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff'
+    },
+}));
 const cymbSound = new Audio("cymb.mp3")
+const crowdSound = new Audio("crowd.mp3")
 cymbSound.volume = 0.5
-const Nav = () => {
+crowdSound.volume = 0.15
+const Nav = ({ scrolled }) => {
+    const classes = useStyles();
     const [count, setCount] = useState(0)
+    const [open, setOpen] = useState(false)
     const [burgerOn, setBurger] = useState(false)
     const [isBroke, setBroke] = useState(false)
+    const [state, setState] = useState({
+        email: "",
+        phone: "",
+        lname: "",
+        fname: ""
+    })
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+    }
+    const handleClick = (e) => {
+        setOpen(false)
+        document.body.style.overflow = "auto";
+    }
 
+    const handleSubmit = () => {
+        alert('Bonne chance !')
+        setOpen(false)
+        document.body.style.overflow = "auto";
+    }
     window.addEventListener("resize", () => {
 
         // Get width and height of the window excluding scrollbars
@@ -28,7 +67,11 @@ const Nav = () => {
         const audio = document.createElement("audio")
         if (count === 10) {
             cymbSound.play()
+            crowdSound.play()
+            setOpen(true)
             setCount(count + 1)
+            document.body.style.overflow = "hidden";
+
         } else if (count < 10) {
             const audio = document.createElement("audio")
             if (count % 2) {
@@ -52,9 +95,31 @@ const Nav = () => {
         { scroll: "newsPanel", name: "Blog" },
         { scroll: "contact", name: "Contact" }]
     const iconsData = [
-        { href: "https://www.youtube.fr", icon: faYoutube, title: "Youtube" },
-        { href: "https://www.instagram.com/", icon: faInstagram, title: "Instagram" },
-        { href: "https://twitter.com/home", icon: faTwitter, title: "Twitter" }]
+        { href: "https://www.youtube.com/user/thestrokes", icon: faYoutube, title: "Youtube" },
+        { href: "https://www.instagram.com/studentproject_thestrokes/", icon: faInstagram, title: "Instagram" },
+        { href: "https://twitter.com/thestrokes", icon: faTwitter, title: "Twitter" }]
+
+    const concoursDiv = <div className="concoursBackdrop">
+        <img className="crowdImage" src={crowdImage}></img>
+        <div className="concoursContainer">
+            <h1>Bravo ! Tentez votre chance pour gagner une guitare dédicacée</h1>
+            <form
+                className="concours__form"
+                onSubmit={handleSubmit}
+            >
+                <input placeholder='Email' name="email" onChange={handleChange}></input>
+                <input placeholder='Numero de téléphone' name="phone" onChange={handleChange}></input>
+                <input placeholder='Nom' name="lname" onChange={handleChange}></input>
+                <input placeholder='Prénom' name="fname" onChange={handleChange}></input>
+                <button type="submit">Envoyer</button>
+            </form>
+
+            <div className="td__admin-panel-cross" onClick={handleClick} >
+                <FontAwesomeIcon icon={faTimes} />
+            </div>
+        </div>
+    </div>
+
     return (
         <nav className='nav'>
             <div className="nav__brand">
@@ -67,7 +132,7 @@ const Nav = () => {
                     key="Home"
                     className="nav__link"
                     onClick={playSound}>
-                    <img src={strokesLogo}></img>
+                    <img src={scrolled ? strokesLogoBlack : strokesLogoWhite}></img>
                 </Link>
 
             </div>
@@ -126,20 +191,23 @@ const Nav = () => {
                         </Link>
                     ))}
 
-                    <li key='brandIcons' className="navMenuIcons">
-                        {iconsData.map(data => {
-                            const { href, title, icon } = data
-                            return (
-                                <a href={href} target="_blank" >
-                                    <FontAwesomeIcon className="icon" icon={icon} title={title} />
-                                </a>
-                            )
+                    <li key='brandIcons' style={{width: "100%", display: "flex", alignItems:"center", justifyContent: "center"}}>
+                        <div className="navMenuIcons">
+                            {iconsData.map(data => {
+                                const { href, title, icon } = data
+                                return (
+                                    <a href={href} target="_blank" >
+                                        <FontAwesomeIcon className="icon" icon={icon} title={title} />
+                                    </a>
+                                )
 
-                        })}
-
+                            })}
+                        </div>
                     </li>
                 </ul>
             </div>
+
+            {open ? concoursDiv : null}
         </nav >
     );
 }

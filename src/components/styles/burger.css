@@ -61,13 +61,12 @@
 
 .navMenuIcons{
     display: flex;
-    justify-content: center;
-    /* width: 100px !important; */
+    justify-content: space-between;
+    width: 100px;
     margin-top: 30px;
 }
 .navMenuIcons a{
     color: #000;
-    padding-left: 30px;
     transition: color .3s ease;
 }
 .navMenuIcons a:hover{

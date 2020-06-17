@@ -4,6 +4,7 @@ import { db } from '../services/firebase';
 import { auth } from 'firebase';
 import { RoleContext } from '../contexts/RoleContext';
 import AdminPanelNews from './AdminPanelNews';
+import Fade from 'react-reveal/Fade';
 
 const NewsPanel = () => {
     const [news, setNews] = useState([]);
@@ -30,7 +31,7 @@ const NewsPanel = () => {
         const overlay = document.querySelector('.news__admin-panel')
         const modify = document.querySelector('.news__modify')
         const cross = document.querySelector('.td__admin-panel-cross')
-        if (e.target == overlay || e.target == modify|| e.currentTarget == cross) {
+        if (e.target == overlay || e.target == modify || e.currentTarget == cross) {
             setOverlay(!showOverlay)
         }
     }
@@ -50,50 +51,58 @@ const NewsPanel = () => {
             <div className="news__container">
                 <div className="news__importantNews">
                     {importantNews
-                        ? <div style={{width:"80%", height:"80%"}}>
-                            <h2 style={{fontSize: "25px" }}>{importantNews.titre}</h2>
+                        ? <div style={{ width: "80%", height: "80%" }}>
+                            <h2 style={{ fontSize: "25px" }}>{importantNews.titre}</h2>
                             <div className="news__importantNews-imageCtnr">
                                 {importantNews.image.length > 0
                                     ? <img src={importantNews.image}></img>
                                     : "Pas d'image"}
                             </div>
-                            <p style={{
-                                textAlign: "right"
-                            }}>{importantNews.description}</p>
-                        </div>
+                            <div style={{ display: "flex", flexDirection: "column", textAlign: "right", marginTop: "20px" }}>
+                                <Fade bottom>
+                                    <h2 style={{ margin: 0, textTransform: "none" }}>{importantNews.subtitle}</h2>
+                                    <p>{importantNews.description}</p>
+                                </Fade>
+                            </div>
+
+                            </div>
                         : null
                     }
                 </div>
-                <ul className="news__news-list">
-                    {news.map(data => {
-                        return (
-                            <li key={data.id} >
-                                <h2 style={{
-                                    fontSize: "25px",
-                                    borderBottom: "4px solid #FFC045",
-                                    width: "65%"
-                                }}>{data.titre}</h2>
-                                <div className="news__news-body">
-                                    <div className="news__news-imageCtnr">
-                                        {data.image.length > 0
-                                            ? <img src={data.image}></img>
-                                            : "Pas d'image"}<br></br>
+                        <ul className="news__news-list">
+                            {news.map(data => {
+                                return (
+                                    <li key={data.id} >
+                                        <h2 style={{
+                                            fontSize: "25px",
+                                            borderBottom: "4px solid #FFC045",
+                                            width: "65%"
+                                        }}>{data.titre}</h2>
+                                        <div className="news__news-body">
+                                            <div className="news__news-imageCtnr">
+                                                {data.image.length > 0
+                                                    ? <img src={data.image}></img>
+                                                    : "Pas d'image"}<br></br>
+                                            </div>
+                                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                                <Fade bottom>
+                                                    <h2 style={{ margin: 0, textTransform: "none" }}>{data.subtitle}</h2>
+                                                    <p>{data.description}</p>
+                                                </Fade>
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                            })}
 
-                                    </div>
-                                    <p>{data.description}</p>
-                                </div>
-                            </li>
-                        )
-                    })}
-
-                </ul>
+                        </ul>
             </div>
 
-            {
-                showOverlay
-                    ? <AdminPanelNews handleClick={handleClick} />
-                    : null
-            }
+                {
+                    showOverlay
+                        ? <AdminPanelNews handleClick={handleClick} />
+                        : null
+                }
         </section >
     );
 }

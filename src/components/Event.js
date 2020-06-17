@@ -23,7 +23,7 @@ const Event = ({ event, index, newEvent }) => {
     const { title, salle, ville, time, lien, type, disabled, editMode, confirm } = state
     const { eventStyle } = styles
 
-    
+
     const handleChange = (e) => {
         setState({
             ...state,
@@ -147,7 +147,7 @@ const Event = ({ event, index, newEvent }) => {
                     disabled={disabled}
                     name="type"
                     onChange={handleChange}
-                     defaultValue={type}>
+                    defaultValue={type}>
                     <option value={0}>Type</option>
                     <option value={1}>Concert</option>
                     <option value={2}>Festival</option>

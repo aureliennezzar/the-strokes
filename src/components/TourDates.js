@@ -5,6 +5,7 @@ import { db } from '../services/firebase';
 import { auth } from 'firebase';
 import AdminPanelTd from './AdminPanelTd';
 import { RoleContext } from '../contexts/RoleContext';
+import Fade from 'react-reveal/Fade';
 const TourDates = () => {
     const [events, setEvents] = useState([])
     const [concerts, setConcerts] = useState([])
@@ -21,7 +22,7 @@ const TourDates = () => {
         const overlay = document.querySelector('.tourDates__admin-panel')
         const modify = document.querySelector('.tourDates__modify')
         const cross = document.querySelector('.td__admin-panel-cross')
-        if (e.target == overlay || e.target == modify|| e.currentTarget == cross) {
+        if (e.target == overlay || e.target == modify || e.currentTarget == cross) {
             setOverlay(!showOverlay)
         }
     }
@@ -55,29 +56,33 @@ const TourDates = () => {
             <div className="tourDates__dates-ctnr">
 
                 <h1 style={{
-                        fontSize: "30px",
-                        textTransform: "uppercase",
-                        fontFamily: "Roboto",
-                        fontStyle: "normal",
-                        fontWeight: "900"
-                    }} className="tourDates__title">{switchChecked ? "Festival" : "Concert"}</h1>
+                    fontSize: "30px",
+                    textTransform: "uppercase",
+                    fontFamily: "Roboto",
+                    fontStyle: "normal",
+                    fontWeight: "900"
+                }} className="tourDates__title">{switchChecked ? "Festival" : "Concert"}</h1>
                 <ul className="tourDates__dates-list">
                     {switchChecked
                         ? festivals.map(event => {
                             return (
                                 <li key={event.id}>
-                                    <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
-                                    <span className="tourDates__date">{event.time}</span><br />
-                                    <a href={event.lien} target="_blank">TICKETS</a>
+                                    <Fade bottom>
+                                        <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
+                                        <span className="tourDates__date">{event.time}</span><br />
+                                        <a href={event.lien} target="_blank">TICKETS</a>
+                                    </Fade>
                                 </li>
                             )
                         })
                         : concerts.map(event => {
                             return (
                                 <li key={event.id}>
-                                    <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
-                                    <span className="tourDates__date">{event.time}</span><br />
-                                    <a href={event.lien} target="_blank">TICKETS</a>
+                                    <Fade bottom>
+                                        <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
+                                        <span className="tourDates__date">{event.time}</span><br />
+                                        <a href={event.lien} target="_blank">TICKETS</a>
+                                    </Fade>
                                 </li>
                             )
                         })
