@@ -34,10 +34,11 @@ const Contact = () => {
         <section className="contact">
             <h1>Contact</h1>
             <div className="contact__links-ctnr">
+                <p>Site réalisé pour un projet étudiant par <a href="https://github.com/strak-stark" target="_blank" rel="noopener noreferrer">Aurélien Nezzar</a>, <a href="https://twitter.com/NicoSellier_" target="_blank" rel="noopener noreferrer">Nicolas Sellier</a> et <a href="https://twitter.com/oupsimweird" target="_blank" rel="noopener noreferrer">Emma Jan</a>. Tout droit réservé. </p>
                 <ul className="contact__links">
                     {isAdmin
                         ? <li className="contact__connect" onClick={handleClick}>Se deconnecter</li>
-                        : <li className="contact__connect" onClick={handleClick}>Admin</li>}
+                        : <li className="contact__connect" onClick={handleClick}>administration</li>}
 
                 </ul>
             </div>

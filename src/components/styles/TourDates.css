@@ -69,8 +69,16 @@
 .tourDates__date {
     font-size: 15px;
 }
-
-@media screen and (max-width:930px) {
+.imgTourDate{
+    position: absolute;
+    top: 50%;
+    left: 105px;
+    transform: translate(0, -50%);
+}
+@media screen and (max-width:942px) {
+    .imgTourDate{
+        visibility: hidden;
+    }
     .tourDates {
         align-items: center;
     }

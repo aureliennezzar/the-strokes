@@ -3,6 +3,7 @@ import './styles/TourDates.css'
 import './styles/switch.css'
 import { db } from '../services/firebase';
 import { auth } from 'firebase';
+import albumTitle from '../assets/album-title.png'
 import AdminPanelTd from './AdminPanelTd';
 import { RoleContext } from '../contexts/RoleContext';
 import Fade from 'react-reveal/Fade';
@@ -53,6 +54,7 @@ const TourDates = () => {
             {isAdmin
                 ? < a className="tourDates__modify" onClick={handleClick}>Modifier</a>
                 : null}
+                <img className="imgTourDate" src={albumTitle}></img>
             <div className="tourDates__dates-ctnr">
 
                 <h1 style={{

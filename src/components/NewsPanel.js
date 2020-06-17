@@ -39,20 +39,23 @@ const NewsPanel = () => {
 
     return (
         <section className="newsPanel">
-            <h1>{"actualités".toUpperCase()}</h1>
             {isAdmin
                 ? <a className="news__modify" style={{
                     cursor: "pointer",
                     position: "absolute",
-                    top: "60px",
+                    top: "55px",
                     right: "50px",
+                    zIndex: "9"
                 }} onClick={handleClick}>Modifier</a>
                 : null}
             <div className="news__container">
                 <div className="news__importantNews">
                     {importantNews
                         ? <div style={{ width: "80%", height: "80%" }}>
-                            <h2 style={{ fontSize: "25px" }}>{importantNews.titre}</h2>
+                            <Fade bottom>
+                                <span>{importantNews.titre}</span>
+                                <h2 style={{ fontSize: "25px", fontFamily: "Jost", letterSpacing: "0.2em" }}>{importantNews.titre}</h2>
+                            </Fade>
                             <div className="news__importantNews-imageCtnr">
                                 {importantNews.image.length > 0
                                     ? <img src={importantNews.image}></img>
@@ -61,48 +64,58 @@ const NewsPanel = () => {
                             <div style={{ display: "flex", flexDirection: "column", textAlign: "right", marginTop: "20px" }}>
                                 <Fade bottom>
                                     <h2 style={{ margin: 0, textTransform: "none" }}>{importantNews.subtitle}</h2>
-                                    <p>{importantNews.description}</p>
+                                    <p>{(importantNews.description).split('\n').map((text, i) => {
+                                        return <> {text} <br /></>
+                                    })}</p>
                                 </Fade>
                             </div>
 
-                            </div>
+                        </div>
                         : null
                     }
                 </div>
-                        <ul className="news__news-list">
-                            {news.map(data => {
-                                return (
-                                    <li key={data.id} >
-                                        <h2 style={{
-                                            fontSize: "25px",
-                                            borderBottom: "4px solid #FFC045",
-                                            width: "65%"
-                                        }}>{data.titre}</h2>
-                                        <div className="news__news-body">
-                                            <div className="news__news-imageCtnr">
-                                                {data.image.length > 0
-                                                    ? <img src={data.image}></img>
-                                                    : "Pas d'image"}<br></br>
-                                            </div>
-                                            <div style={{ display: "flex", flexDirection: "column" }}>
-                                                <Fade bottom>
-                                                    <h2 style={{ margin: 0, textTransform: "none" }}>{data.subtitle}</h2>
-                                                    <p>{data.description}</p>
-                                                </Fade>
-                                            </div>
-                                        </div>
-                                    </li>
-                                )
-                            })}
+                <ul className="news__news-list">
+                    {news.map(data => {
+                        return (
+                            <li key={data.id} >
+                                <Fade bottom>
+                                    <span>{data.titre}</span>
+                                    <h2 style={{
+                                        fontSize: "20px",
+                                        borderBottom: "4px solid #FFC045",
+                                        width: "65%",
+                                        zIndex: "9",
+                                        fontFamily: "Jost",
+                                        letterSpacing: "0.2em"
+                                    }}>{data.titre}</h2>
+                                </Fade>
+                                <div className="news__news-body">
+                                    <div className="news__news-imageCtnr">
+                                        {data.image.length > 0
+                                            ? <img src={data.image}></img>
+                                            : "Pas d'image"}<br></br>
+                                    </div>
+                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                        <Fade bottom>
+                                            <h2 style={{ margin: 0, textTransform: "none" }}>{data.subtitle}</h2>
+                                            <p>{(data.description).split('\n').map((text, i) => {
+                                                return <> {text} <br /></>
+                                            })}</p>
+                                        </Fade>
+                                    </div>
+                                </div>
+                            </li>
+                        )
+                    })}
 
-                        </ul>
+                </ul>
             </div>
 
-                {
-                    showOverlay
-                        ? <AdminPanelNews handleClick={handleClick} />
-                        : null
-                }
+            {
+                showOverlay
+                    ? <AdminPanelNews handleClick={handleClick} />
+                    : null
+            }
         </section >
     );
 }

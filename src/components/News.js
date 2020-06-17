@@ -140,6 +140,7 @@ const News = ({ news, index, isImportant }) => {
                 description,
                 image,
                 publishDate,
+                important: isImportant,
                 subtitle
             })
 
@@ -149,6 +150,7 @@ const News = ({ news, index, isImportant }) => {
                 description,
                 image,
                 publishDate,
+                important: isImportant,
                 subtitle
             })
         }

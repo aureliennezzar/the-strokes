@@ -25,6 +25,7 @@ const Album = () => {
     return (
         <section className="album">
             <img className="albumSvg" src={albumSvg}></img>
+
             <div className="album__left">
                 <img src={albumImage}></img>
             </div>
