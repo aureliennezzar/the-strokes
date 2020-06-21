@@ -4,7 +4,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link } from "react-scroll";
 import './styles/Hero.css'
 
 const Hero = () => {
@@ -23,7 +23,6 @@ const Hero = () => {
     const handleClick = () => {
         const { video } = state
         video.muted = !video.muted;
-        console.log(video.muted)
         setState({
             ...state,
             muteIcon: video.muted ? faVolumeMute : faVolumeUp,

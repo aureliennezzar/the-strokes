@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import News from './News';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -136,7 +136,7 @@ const AdminPanelNews = (props) => {
                                 <div className="news-body2">
                                     <div className="news-imageCtnr">
                                         {state.image.length > 0
-                                            ? <img src={state.image}></img>
+                                            ? <img src={state.image}  alt="Actualité"></img>
                                             : "Pas d'image"}
                                     </div>
                                 </div>

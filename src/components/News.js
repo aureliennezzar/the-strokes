@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Fade from 'react-reveal/Fade';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import './styles/News.css'
@@ -39,7 +38,6 @@ const News = ({ news, index, isImportant }) => {
         description,
         publishDate,
         image,
-        important,
         subtitle,
         titreActu,
         open,
@@ -177,7 +175,7 @@ const News = ({ news, index, isImportant }) => {
                         : editMode
                             ? null :
                             <>
-                                <div className="starCtnr" onClick={handleFavourite}>{isImportant ? <img className="starImage star" src={fullstar}></img> : <img className="emptyStarImage star" src={emptystar}></img>}</div>
+                                <div className="starCtnr" onClick={handleFavourite}>{isImportant ? <img className="starImage star" src={fullstar} alt="Etoile remplie"></img> : <img className="emptyStarImage star" src={emptystar} alt="Etoile creuse"></img>}</div>
                                 <FontAwesomeIcon className="event-icons" icon={faTrash} onClick={handleDelete} />
                             </>}
 
@@ -252,7 +250,7 @@ const News = ({ news, index, isImportant }) => {
             <div className="news-body2">
                 <div className="news-imageCtnr">
                     {image.length > 0
-                        ? <img src={image}></img>
+                        ? <img src={image} alt="Actualité"></img>
                         : "Pas d'image"}
                 </div>
             </div>

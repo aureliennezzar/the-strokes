@@ -16,11 +16,22 @@
     height: 80%;
 }
 
-.news__container h2 {
+.news-title-data {
     text-transform: uppercase;
     font-family: "Jura";
     font-size: 30px;
     line-height: 35px;
+}
+
+.news-title-ctnr {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.news-title {
+    margin-right: 100px;
 }
 
 .news__importantNews {
@@ -30,7 +41,9 @@
     width: 45%;
     height: 100%;
 }
-
+.importantNewsTitle{
+    text-transform: uppercase;
+}
 .news__importantNews-imageCtnr {
     display: flex;
     flex-direction: column;
@@ -39,12 +52,12 @@
 }
 
 .news__importantNews-imageCtnr img {
-    width: 50%;
+    width: 400px;
     height: auto;
 }
 
 .news__news-imageCtnr {
-    min-width: 50%;
+    min-width: auto;
     height: 50%;
     padding: 24px 24px 24px 0;
 }
@@ -67,8 +80,28 @@
     height: 50%;
 }
 
+.news__modify {
+    position: absolute;
+    top: 20px;
+    right: 5vw;
+    z-index: 9;
+    border: none;
+    background: none;
+    font-size: 15px;
+    text-decoration: underline;
+    color: #fff;
+    cursor: pointer;
+}
+
+.news__modify:focus {
+    outline: none;
+}
+
 .news__news-body p {
     font-size: 15px;
+    font-family: "Jura";
+    font-size: 15px;
+    line-height: 18px;
 }
 
 .news__news-list li {
@@ -76,21 +109,22 @@
     display: flex;
     flex-direction: column;
 }
-.news__news-list li span, .news__importantNews span{
+
+.news__news-list li span, .news__importantNews span {
     position: absolute;
     width: auto;
     margin-block-start: 0.83em;
     margin-block-end: 0.83em;
     color: rgba(255, 255, 255, 0);
     -webkit-text-stroke: 1px;
-    
     text-transform: uppercase;
+    letter-spacing: 0.2em;
     z-index: 8;
     /* font-weight: bold; */
     font-family: 'Roboto';
     line-height: 35px;
-
 }
+
 .news__news-list li span {
     top: -23px;
     left: 6px;
@@ -98,21 +132,67 @@
     font-size: 30px;
 }
 
-.news__importantNews span{
+.news__importantNews span {
     top: -20px;
     left: 50px;
     -webkit-text-stroke-color: #ffc045b3;
     font-size: 35px;
 }
-.news__news-list img {
-    max-width: 100%;
+
+.news-title-data {
+    font-size: 20px;
+    border-bottom: 4px solid #FFC045;
+    width: 65%;
+    z-index: 9;
+    font-family: "Jost";
+    letter-spacing: 0.2em;
 }
-@media screen and (max-width: 930px) {
+
+.importantNewsTitle {
+    font-size: 25px;
+    font-family: 'Jost';
+    letter-spacing: 0.2em;
+    z-index: 9;
+}
+
+.news__news-list img {
+    max-width: 250px;
+}
+
+.news-subtitle {
+    margin: 0;
+    text-transform: none;
+    font-size: 30px;
+}
+
+/* @media screen and (max-width: 1250px) {
+    .news__importantNews-imageCtnr img {
+        width: 70%;
+        height: auto;
+    }
+} */
+
+@media screen and (max-width: 590px) {
+    .news-title {
+        width: 50vw;
+    }
+}
+
+@media screen and (max-width: 1010px) {
+    .news-title-ctnr {
+        display: flex;
+        position: relative;
+        width: 100%;
+        justify-content: center;
+    }
+    .news-title {
+        margin-right: 0;
+    }
     .news__container {
         flex-direction: column;
         align-items: center;
     }
-    .news__container h2{
+    .news__container h2 {
         width: auto !important;
     }
     .news__importantNews {
@@ -122,27 +202,46 @@
         width: 100%;
         align-items: center;
     }
-    .news__news-body p {
-        font-size: 2vw;
+    .news__news-body {
+        flex-direction: column;
+        text-align: center;
+    }
+    .news__news-body h2 {
+        font-family: "Jura";
+        font-weight: 500;
     }
     .news__news-list li {
         width: 100%;
         align-items: center;
     }
     .news__news-list li span {
-        top: -20px;
+        top: -2vw;
         left: 30vw;
+        font-size: 3vw;
+    }
+    .news__importantNews span {
+        top: -6vw;
+        left: 10vw;
+        font-size: 4vw;
+        /* top: -2vw;
+        left: 30vw;
+        font-size: 3vw; */
+    }
+    .importantNewsTitle{
+        font-size: 2.7vw !important;
+    }
+    .news-title-data {
+        font-size: 2.7vw !important;
+    }
+    .news__importantNews-imageCtnr img {
+        width: 70%;
+        height: auto;
     }
 }
 
-@media screen and (max-width: 1010px) {
-    .news__container h2 {
-        font-size: 2.7vw;
+@media screen and (max-width: 568px) {
+    .news-subtitle {
+        font-size: 6vw;
     }
-}
 
-@media screen and (max-width: 670px) {
-    .news__news-list li span {
-        font-size: 5vw;
-    }
 }

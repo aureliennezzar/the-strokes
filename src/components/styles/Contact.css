@@ -5,39 +5,42 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 50vh;
+    min-height: 50vh;
     color: #fff;
     background-color: #000;
+    font-family: "Roboto";
+    padding: 50px 0 10px 0;
 }
 
-.contact h1 {
-    position: absolute;
-    top: 10px;
-}
-
-.contact__links-ctnr p{
+.contact__links-ctnr p {
     color: #555555;
 }
-.contact__links-ctnr a{
+
+.contact__links-ctnr a {
     color: #637586;
 }
-.contact__links-ctnr{
+
+.contact__links-ctnr {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: absolute;
-    bottom: 30px;
+    text-align: center;
 }
+
 .contact__links {
+    display: flex;
     padding: 0;
     margin: 0;
     list-style: none;
 }
-.contact__links li{
+
+.contact__links li {
     cursor: pointer;
+    padding-right: 30px;
 }
-.contact__overlay{
+
+.contact__overlay {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,4 +50,79 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.877);
     z-index: 20;
+}
+
+.contact__header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contact__brands {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    height: auto;
+}
+
+.contact-icon {
+    font-size: 40px;
+    color: #ffc045;
+}
+
+.newsletter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newsletter__input {
+    height: 34px;
+}
+
+.newsletter p {
+    font-size: 15px;
+}
+
+.newsletter__input input {
+    outline: none;
+    width: 327px;
+    height: 32px;
+    border: none;
+    border-right: 1px solid #000;
+    background: #fff;
+    padding-left: 15px;
+}
+
+.newsletter__input button {
+    outline: none;
+    cursor: pointer;
+    width: 100px;
+    height: 100%;
+    color: #000;
+    background: #fff;
+    border: none;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 1010px) {
+    .contact__brands {
+        width: 50vw;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .contact__links li {
+        cursor: pointer;
+        padding-right: 1vw;
+        font-size: 4vw;
+    }
+    .contact__brands {
+        width: 250.5px;
+    }
+    .newsletter__input input {
+        width: 55vw;
+    }
 }

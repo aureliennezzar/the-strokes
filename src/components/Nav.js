@@ -1,35 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from "react-scroll";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram, faYoutube, faTwitter } from "@fortawesome/fontawesome-free-brands";
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faInstagram, faYoutube, faTwitter, faFacebook } from "@fortawesome/fontawesome-free-brands";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import strokesLogoBlack from '../assets/the-strokes-logo-black.svg'
-import strokesLogoWhite from '../assets/the-strokes-logo-white.svg'
+import strokesLogoWhite from '../assets/the-strokes-logo-white.png'
 import crowdImage from '../assets/crowd-at-concert.jpg'
 import './styles/burger.css'
 import './styles/concours.css'
 import './styles/Nav.css'
 
 
-const useStyles = makeStyles((theme) => ({
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
-        color: '#fff'
-    },
-}));
 const cymbSound = new Audio("cymb.mp3")
 const crowdSound = new Audio("crowd.mp3")
 cymbSound.volume = 0.5
 crowdSound.volume = 0.15
 const Nav = ({ scrolled }) => {
-    const classes = useStyles();
     const [count, setCount] = useState(0)
     const [open, setOpen] = useState(false)
     const [burgerOn, setBurger] = useState(false)
-    const [isBroke, setBroke] = useState(false)
     const [state, setState] = useState({
         email: "",
         phone: "",
@@ -56,22 +45,18 @@ const Nav = ({ scrolled }) => {
 
         // Get width and height of the window excluding scrollbars
         var w = document.documentElement.clientWidth;
-        var h = document.documentElement.clientHeight;
         if (w > 930) {
             setBurger(false)
         }
 
     });
     const playSound = () => {
-
-        const audio = document.createElement("audio")
         if (count === 10) {
             cymbSound.play()
             crowdSound.play()
             setOpen(true)
             setCount(count + 1)
             document.body.style.overflow = "hidden";
-
         } else if (count < 10) {
             const audio = document.createElement("audio")
             if (count % 2) {
@@ -95,21 +80,27 @@ const Nav = ({ scrolled }) => {
         { scroll: "newsPanel", name: "Blog" },
         { scroll: "contact", name: "Contact" }]
     const iconsData = [
+        { href: "https://www.facebook.com/thestrokes/", icon: faFacebook, title: "Facebook" },
         { href: "https://www.youtube.com/user/thestrokes", icon: faYoutube, title: "Youtube" },
         { href: "https://www.instagram.com/studentproject_thestrokes/", icon: faInstagram, title: "Instagram" },
         { href: "https://twitter.com/thestrokes", icon: faTwitter, title: "Twitter" }]
 
     const concoursDiv = <div className="concoursBackdrop">
-        <img className="crowdImage" src={crowdImage}></img>
+        <img className="crowdImage" src={crowdImage} alt="Foule de concert"></img>
         <div className="concoursContainer">
-            <h1>Bravo ! Tentez votre chance pour gagner une guitare dédicacée</h1>
+            <h1>félicitations !</h1>
+            <h3>Pour participer au tirage au sort,<br /> veuillez remplir les champs ci-dessous :</h3>
             <form
                 className="concours__form"
                 onSubmit={handleSubmit}
             >
+                <label>Email</label>
                 <input placeholder='Email' name="email" onChange={handleChange}></input>
+                <label>Numero de téléphone</label>
                 <input placeholder='Numero de téléphone' name="phone" onChange={handleChange}></input>
+                <label>Nom</label>
                 <input placeholder='Nom' name="lname" onChange={handleChange}></input>
+                <label>Prénom</label>
                 <input placeholder='Prénom' name="fname" onChange={handleChange}></input>
                 <button type="submit">Envoyer</button>
             </form>
@@ -123,20 +114,10 @@ const Nav = ({ scrolled }) => {
     return (
         <nav className='nav'>
             <div className="nav__brand">
-                <Link
-                    activeClass="active"
-                    spy={true}
-                    smooth={true}
-                    offset={0}
-                    duration={500}
-                    key="Home"
-                    className="nav__link"
-                    onClick={playSound}>
-                    <img src={scrolled ? strokesLogoBlack : strokesLogoWhite}></img>
-                </Link>
-
+                <img alt="Logo des Strokes" onClick={playSound} src={scrolled ? strokesLogoBlack : strokesLogoWhite}></img>
             </div>
             <div className="nav__links">
+                <li className="nav__link concoursLink">Jeu Concours</li>
                 {linksData.map(link => (
                     <Link
                         activeClass="active"
@@ -152,10 +133,10 @@ const Nav = ({ scrolled }) => {
                 ))}
             </div>
             <div className="nav__links-icons">
-                {iconsData.map(data => {
+                {iconsData.map((data, i) => {
                     const { href, title, icon } = data
                     return (
-                        <a href={href} target="_blank" >
+                        <a key={i} href={href} target="_blank" rel="noopener noreferrer" >
                             <FontAwesomeIcon className="icon" icon={icon} title={title} />
                         </a>
                     )
@@ -172,6 +153,7 @@ const Nav = ({ scrolled }) => {
             </div>
             <div id="menuToggle">
                 <ul id="menu" className={burgerOn ? "changeMenu" : "hideMenu"}>
+                    <li className="nav__link concoursLink">Concours</li>
                     {linksData.map(link => (
                         <Link
                             activeClass="active"
@@ -191,12 +173,12 @@ const Nav = ({ scrolled }) => {
                         </Link>
                     ))}
 
-                    <li key='brandIcons' style={{width: "100%", display: "flex", alignItems:"center", justifyContent: "center"}}>
+                    <li key='brandIcons' className="nav__BrandIconsCtnr" >
                         <div className="navMenuIcons">
-                            {iconsData.map(data => {
+                            {iconsData.map((data, i) => {
                                 const { href, title, icon } = data
                                 return (
-                                    <a href={href} target="_blank" >
+                                    <a key={i} href={href} target="_blank" rel="noopener noreferrer" >
                                         <FontAwesomeIcon className="icon" icon={icon} title={title} />
                                     </a>
                                 )

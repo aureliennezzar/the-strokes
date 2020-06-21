@@ -1,0 +1,42 @@
+.description {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: "Jura";
+    margin: 10px 0 100px 0;
+    width: 100%;
+    height: auto;
+}
+
+.description h1, .description h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.description h1 {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.description h2 {
+    font-size: 30px;
+    font-weight: lighter;
+    margin-bottom: 30px;
+}
+
+.description p {
+    font-size: 20px;
+    width: 880px;
+    letter-spacing: 0.2em;
+}
+
+@media screen and (max-width: 900px) {
+    .description p {
+        font-size: 20px;
+        width: auto;
+        letter-spacing: 0.2em;
+        padding: 0 15px;
+    }
+}

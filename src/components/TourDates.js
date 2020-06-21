@@ -2,18 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import './styles/TourDates.css'
 import './styles/switch.css'
 import { db } from '../services/firebase';
-import { auth } from 'firebase';
-import albumTitle from '../assets/album-title.png'
+import abnormalTour from '../assets/abnormalTour.svg'
 import AdminPanelTd from './AdminPanelTd';
 import { RoleContext } from '../contexts/RoleContext';
 import Fade from 'react-reveal/Fade';
 const TourDates = () => {
-    const [events, setEvents] = useState([])
     const [concerts, setConcerts] = useState([])
     const [festivals, setFestivals] = useState([])
     const [showOverlay, setOverlay] = useState(false)
-    const [switchChecked, setSwitch] = useState(false)
-    const tourDatesRef = db.collection("tour-dates")
+    const [switchChecked, setSwitch] = useState(true)
     let isAdmin = useContext(RoleContext)
     const handleChange = () => {
         setSwitch(!switchChecked)
@@ -23,12 +20,12 @@ const TourDates = () => {
         const overlay = document.querySelector('.tourDates__admin-panel')
         const modify = document.querySelector('.tourDates__modify')
         const cross = document.querySelector('.td__admin-panel-cross')
-        if (e.target == overlay || e.target == modify || e.currentTarget == cross) {
+        if (e.target === overlay || e.target === modify || e.currentTarget === cross) {
             setOverlay(!showOverlay)
         }
     }
     useEffect(() => {
-        return tourDatesRef.onSnapshot((snapshot) => {
+        return db.collection("tour-dates").onSnapshot((snapshot) => {
             const eventsData = []
             const concertsData = []
             const festivalsData = []
@@ -41,7 +38,6 @@ const TourDates = () => {
                 }
                 eventsData.push(({ ...doc.data(), id: doc.id }))
             })
-            setEvents(eventsData)
             setConcerts(concertsData)
             setFestivals(festivalsData)
         })
@@ -51,10 +47,13 @@ const TourDates = () => {
 
     return (
         <section className="tourDates">
+            <div className="tourDates__bg-image">
+
+            </div>
             {isAdmin
-                ? < a className="tourDates__modify" onClick={handleClick}>Modifier</a>
+                ? <button className="tourDates__modify" onClick={handleClick}>Modifier</button>
                 : null}
-                <img className="imgTourDate" src={albumTitle}></img>
+                <img className="imgTourDate" src={abnormalTour} alt="The New Abnormal"></img>
             <div className="tourDates__dates-ctnr">
 
                 <h1 style={{
@@ -69,22 +68,20 @@ const TourDates = () => {
                         ? festivals.map(event => {
                             return (
                                 <li key={event.id}>
-                                    <Fade bottom>
                                         <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
                                         <span className="tourDates__date">{event.time}</span><br />
-                                        <a href={event.lien} target="_blank">TICKETS</a>
-                                    </Fade>
+                                        <a href={event.lien} target="_blank" rel="noopener noreferrer">TICKETS</a>
+                                    
                                 </li>
                             )
                         })
                         : concerts.map(event => {
                             return (
                                 <li key={event.id}>
-                                    <Fade bottom>
                                         <span className="tourDates__loc">{event.salle},</span> <span className="tourDates__loc2">{event.ville}</span><br />
                                         <span className="tourDates__date">{event.time}</span><br />
-                                        <a href={event.lien} target="_blank">TICKETS</a>
-                                    </Fade>
+                                        <a href={event.lien} target="_blank" rel="noopener noreferrer">TICKETS</a>
+                                    
                                 </li>
                             )
                         })

@@ -50,7 +50,8 @@
     margin-top: 1em;
     display: flex;
     justify-content: space-between;
-    width: 400px;
+    width: 70%;
+    /* margin-left: 30px; */
 }
 
 .album__music-medias img {
@@ -64,16 +65,21 @@
     transform: translate(-50%, 0);
     /* décalage de 50% de sa propre taille */
 }
-.album__available-text{
+
+.album__available-text {
     display: flex;
     width: 400px;
     justify-content: space-between;
 }
+
 .album__available p {
     font-size: 20px;
 }
 
 @media screen and (max-width:1300px) {
+    .album__music-medias {
+        width: 100%;
+    }
     .album {
         flex-direction: column;
     }
@@ -106,6 +112,9 @@
 }
 
 @media screen and (max-width:450px) {
+    .album__available {
+        width: 100%;
+    }
     .albumSvg {
         top: 0;
         width: 30vw;
@@ -116,7 +125,7 @@
     .album__right p {
         font-size: 3vw;
     }
-    .album__available-text{
+    .album__available-text {
         width: auto;
         justify-content: center;
     }

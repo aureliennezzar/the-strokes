@@ -7,7 +7,7 @@ const Showcase = () => {
     return (
         <section className="showcase">
             <Fade bottom>
-                <img src={showcaseImage}></img>
+                <img src={showcaseImage} alt="CD et vinyle"></img>
                 <button>pre-commandez en exclusivité</button>
 
             </Fade>

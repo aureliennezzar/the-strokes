@@ -21,6 +21,7 @@
     border: 1px solid #01AC93;
     border-radius: 10px;
     cursor: pointer;
+    outline: none;
 }
 .showcase img{
     width: 100%;

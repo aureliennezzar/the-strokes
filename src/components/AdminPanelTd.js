@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { db } from '../services/firebase';
 import Event from './Event';
 import './styles/AdminPanelTd.css'
@@ -8,7 +8,6 @@ const AdminPanelTd = (props) => {
     const { handleClick } = props
     const [events, setEvents] = useState([]);
     const [newEvent, setNewEvent] = useState(false)
-    const [btnCtnrStyle, setBtnCtnrStyle] = useState({})
     const [state, setState] = useState({
         salle: "",
         ville: "",
@@ -106,7 +105,7 @@ const AdminPanelTd = (props) => {
                                 <li className="event-ctnr">
                                     <div className="event-header">
                                         {"Nouvel évènement".toUpperCase()}
-                                        <div style={btnCtnrStyle} className="event-header__btnCtnr">
+                                        <div className="event-header__btnCtnr">
                                             <FontAwesomeIcon className="event-icons" icon={faCheck} onClick={handleConfirm} />
                                             <FontAwesomeIcon className="event-icons" icon={faTimes} onClick={handleAbort} />
                                         </div>

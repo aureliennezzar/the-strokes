@@ -19,15 +19,15 @@ const Album = () => {
         "Not The Same Anymore",
         "Ode To The Mets"]
     const musicMedias = [
-        { icon: deezerSvg, lien: "https://www.deezer.com/fr/artist/569" },
-        { icon: appleSvg, lien: "https://music.apple.com/fr/artist/the-strokes/560289" },
-        { icon: spotifySvg, lien: "https://open.spotify.com/artist/0epOFNiUfyON9EYx7Tpr6V" }]
+        { icon: deezerSvg, lien: "https://www.deezer.com/fr/artist/569", nom: "Deezer" },
+        { icon: appleSvg, lien: "https://music.apple.com/fr/artist/the-strokes/560289", nom: "Apple" },
+        { icon: spotifySvg, lien: "https://open.spotify.com/artist/0epOFNiUfyON9EYx7Tpr6V", nom: "Spotify" }]
     return (
         <section className="album">
-            <img className="albumSvg" src={albumSvg}></img>
+            <img className="albumSvg" src={albumSvg} alt="The New Abnormal"></img>
 
             <div className="album__left">
-                <img src={albumImage}></img>
+                <img src={albumImage} alt="Musiciens"></img>
             </div>
             <div className="album__right">
                 <div className="album__tracklist">
@@ -41,11 +41,11 @@ const Album = () => {
 
                     <Fade bottom >
                         <div className="album__available-text" >
-                            <img src={playArrow}></img>
+                            <img src={playArrow} alt="Fleche droite"></img>
                             <p>Bientot disponible sur : </p>
                         </div>
                         <div className="album__music-medias">
-                            {musicMedias.map((media, i) => <a href={media.lien} target="_blank" style={{ color: "rgb(0, 0, 0)" }} key={i}><img src={media.icon}></img></a>)}
+                            {musicMedias.map((media, i) => <a href={media.lien} target="_blank"  rel="noopener noreferrer" style={{ color: "rgb(0, 0, 0)" }} key={i}><img src={media.icon} alt={media.nom}></img></a>)}
                         </div>
                     </Fade>
                 </div>

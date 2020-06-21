@@ -1,0 +1,111 @@
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: #0A0A0A;
+    z-index: 1000;
+}
+
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
+
+/* Loaded style*/
+
+.loaded #loader-wrapper .loader-section.section-left {
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -webkit-transition: all .7s .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all .7s .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.loaded #loader-wrapper .loader-section.section-right {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+    -webkit-transition: all .7s .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all .7s .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.loaded .wave-fill{
+    opacity: 0;
+    -webkit-transition: all .3s .3s ease-out;
+    transition: all .3s .3s ease-out;
+}
+
+.loaded #loader-wrapper {
+    visibility: hidden;
+    -webkit-transition: all .3s 1s ease-out;
+    transition: all .3s 1s ease-out;
+}
+/* water Loader  */
+.wave-fill{
+    height: 150px;
+    width: 150px;
+    background: #ccc;
+    mask-image: url("../../assets/STROKESTROU.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    z-index: 1001;
+}
+span{
+    display: block;
+    width: 100%;
+}
+
+.blue.wave{
+    background: url("../../assets/waveBlue.png");
+    height: 22px;
+    background-size: contain;
+    animation: wave 3s ease-in-out;
+}
+.orange.wave{
+    background: url("../../assets/waveOrange.png");
+    height: 22px;
+    background-size: contain;
+    animation: wave 3s ease-in-out;
+}
+.deep-water{
+    height: 200px;
+}
+
+@keyframes wave{
+    from{
+        background-position: 600px 0px;
+    }
+    to{
+        background-position: 1000px 0px;
+
+    }
+}
+.water{
+    animation: water 3s ease;
+}
+@keyframes water{
+    from{
+        transform: translateY(100%);
+    }
+    to{
+        
+        transform: translateY(-10%);
+    }
+}

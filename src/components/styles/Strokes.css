@@ -7,31 +7,63 @@
     min-height: calc(100vh - 60px);
     color: #fff;
 }
-.theStrokes__left-TitleCtnr{
-    position: relative;
+
+.theStrokes__left-TitleCtnr {
+    position: absolute;
+    right: 5px;
+    top: -70px;
 }
-.dateSvg1{
+
+.dateSvg1 {
     position: absolute;
     top: -15px;
     right: -2px;
-
 }
+
 .theStrokes__left {
     position: relative;
-    width: 40%;
+    display: flex;
+    align-items: center;
+    /* width: 60%; */
     height: calc(100vh - 60px);
 }
-.theStrokes__left-ctnr{
-    position: absolute;
-    bottom: 200px;
-    right: 0;
-    width:400px;
-    height:250px;
+
+.theStrokes__left-ctnr {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 700px;
+    height: auto;
     text-align: right;
 }
-.theStrokes__right {
-    position: relative;
+
+.theStrokes__left-ctnr h2 {
+    font-family: "Jura";
+    text-transform: uppercase;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+}
+
+.theStrokes__description {
+    font-family: "Jura";
     width: 60%;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+}
+
+.strokesTitle {
+    width: 300px;
+    position: absolute;
+    top: 0;
+}
+
+.mockup-video {
+    max-width: 800px;
+    height: auto;
 }
 
 .theStrokes__left img {
@@ -40,29 +72,67 @@
     height: auto;
 }
 
-.theStrokes__right img {
-    max-width: 90%;
-    height: auto;
-}
+@media screen and (max-width: 1500px) {
+    .strokesTitle {
+        display: none;
+    }}
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 1300px) {
+    .theStrokes__left {
+        margin-bottom: calc(225px + 20vw);
+    }
     .theStrokes {
         flex-direction: column;
     }
-    .theStrokes__left, .theStrokes__right {
+    .mockup-video {
+        max-width: 500px;
+        height: auto;
+    }
+    .theStrokes__left{
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
     }
-    .theStrokes__left-ctnr{
-        position: static;
+    .theStrokes__description {
+        width: 85%;
+        font-size: 15px;
     }
-    .theStrokes__left{
+    .theStrokes__left-ctnr {
+        position: relative;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+        bottom: 50px;
+        width: 100%;
+    }
+    .theStrokes__left {
         width: auto;
-        height: auto;
+        height: 600px;
     }
     .theStrokes__right img {
         position: static;
+    }
+    .dateSvg1 {
+        position: absolute;
+        top: -15px;
+        left: 30%;
+    }
+    .theStrokes__left-TitleCtnr {
+        right: 100px;
+        top: -60px;
+    }
+}
+@media screen and (max-width: 630px) {
+    .theStrokes__description {
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .theStrokes__description {
+        font-size: 13px;
     }
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import InstaCarousel from './components/InstaCarousel';
 import "./App.css"
 import Nav from './components/Nav';
 import Hero from './components/Hero';
@@ -11,6 +10,8 @@ import { RoleContext } from './contexts/RoleContext';
 import Strokes from './components/Strokes';
 import Album from './components/Album';
 import Showcase from './components/Showcase';
+import Loader from './components/Loader';
+import Description from './components/Description';
 
 const App = () => {
   document.addEventListener("DOMContentLoaded", function () {
@@ -19,7 +20,6 @@ const App = () => {
     const burgerBars = document.querySelectorAll('.burgerBars')
     const navIcons = document.querySelectorAll('.nav__links-icons a')
     const navBrand = document.querySelector('.nav__brand')
-    console.log(burgerBars)
     window.addEventListener('scroll', () => {
       if (active && window.scrollY < 130) {
         active = !active
@@ -73,13 +73,14 @@ const App = () => {
     <div className="App">
       <RoleContext.Provider value={isAdmin}>
         <header>
-          <Nav scrolled={scrolled}/>
+          <Nav scrolled={scrolled} />
         </header>
         <main>
           <Hero />
           <Strokes />
           <Album />
           <Showcase />
+          <Description />
           <TourDates />
           <NewsPanel />
         </main>
@@ -87,6 +88,7 @@ const App = () => {
           <Contact />
         </footer>
       </RoleContext.Provider>
+      <Loader />
     </div>
   );
 }

@@ -2,7 +2,7 @@ nav {
     background: #ffffff00;
     color: white;
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 60px;
     align-items: center;
     justify-content: space-between;
@@ -25,6 +25,16 @@ nav {
     padding: 10px;
 }
 
+.concoursLink {
+    color: #ffc045;
+    transition: .2s;
+}
+
+.concoursLink:hover {
+    color: #c98909 !important;
+    transition: .2s;
+}
+
 .nav__links-icons a {
     text-decoration: none;
     color: rgb(255, 255, 255);
@@ -44,13 +54,29 @@ nav {
     transition: .2s;
 }
 
+.nav__brand img {
+    height: 49px;
+    width: 163px;
+}
+
 .nav__link {
+    font-family: "Jura";
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     height: 100%;
     margin: 0;
+    font-size: 15px;
+    text-transform: uppercase;
+    line-height: 18px;
+    letter-spacing: 0.1em;
+    transition: .2s;
+}
+
+.nav__link:hover {
+    color: #01AC93;
+    transition: .2s;
 }
 
 .nav {
@@ -65,9 +91,9 @@ nav {
 .nav__links {
     display: flex;
     position: absolute;
-    left: calc(50% - 400px/2);
+    left: calc(50% - 800px/2);
     justify-content: space-between;
-    width: 500px;
+    width: 800px;
 }
 
 .nav__buttons {
@@ -75,27 +101,37 @@ nav {
     height: 100%;
 }
 
-@media screen and (max-width: 930px) {
+.nav__BrandIconsCtnr {
+    width: 65% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+@media screen and (max-width: 1212px) {
+    .nav__BrandIconsCtnr {
+        width: 100% !important;
+    }
     .nav__brand {
         width: 100%;
     }
-    .bar1, .bar2, .bar3 {
+    .bar1 .bar2, .bar3 {
         transition: 0.4s;
     }
     .nav__links, .nav__links-icons {
-        visibility: hidden;
+        display: none;
     }
     .nav__links-burger {
-        visibility: visible;
+        display: block;
     }
     #menuToggle {
-        visibility: visible;
+        display: flex;
     }
 }
 
 @media screen and (max-width: 825px) {
     #menu {
-        width: 80vw;
-        padding: 50px 10vw;
+        width: 100vw;
     }
 }

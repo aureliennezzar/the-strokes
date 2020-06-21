@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Fade from 'react-reveal/Fade';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import './styles/Event.css'

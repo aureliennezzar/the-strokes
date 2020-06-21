@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './styles/NewsPanel.css'
+import abnormal from '../assets/news-title.svg'
 import { db } from '../services/firebase';
-import { auth } from 'firebase';
 import { RoleContext } from '../contexts/RoleContext';
 import AdminPanelNews from './AdminPanelNews';
 import Fade from 'react-reveal/Fade';
@@ -10,10 +10,9 @@ const NewsPanel = () => {
     const [news, setNews] = useState([]);
     const [importantNews, setImportantNews] = useState(null);
     const [showOverlay, setOverlay] = useState(false)
-    const NewsRef = db.collection("news")
     let isAdmin = useContext(RoleContext)
     useEffect(() => {
-        return NewsRef.onSnapshot((snapshot) => {
+        return db.collection("news").onSnapshot((snapshot) => {
             const newsData = []
             setImportantNews(null)
             snapshot.forEach(doc => {
@@ -31,7 +30,7 @@ const NewsPanel = () => {
         const overlay = document.querySelector('.news__admin-panel')
         const modify = document.querySelector('.news__modify')
         const cross = document.querySelector('.td__admin-panel-cross')
-        if (e.target == overlay || e.target == modify || e.currentTarget == cross) {
+        if (e.target === overlay || e.target === modify || e.currentTarget === cross) {
             setOverlay(!showOverlay)
         }
     }
@@ -39,14 +38,11 @@ const NewsPanel = () => {
 
     return (
         <section className="newsPanel">
+            <div className="news-title-ctnr">
+                <img className="news-title" src={abnormal} alt="Abnormal"></img>
+            </div>
             {isAdmin
-                ? <a className="news__modify" style={{
-                    cursor: "pointer",
-                    position: "absolute",
-                    top: "55px",
-                    right: "50px",
-                    zIndex: "9"
-                }} onClick={handleClick}>Modifier</a>
+                ? <button className="news__modify" onClick={handleClick}>Modifier</button>
                 : null}
             <div className="news__container">
                 <div className="news__importantNews">
@@ -54,18 +50,18 @@ const NewsPanel = () => {
                         ? <div style={{ width: "80%", height: "80%" }}>
                             <Fade bottom>
                                 <span>{importantNews.titre}</span>
-                                <h2 style={{ fontSize: "25px", fontFamily: "Jost", letterSpacing: "0.2em" }}>{importantNews.titre}</h2>
+                                <h2 className="importantNewsTitle">{importantNews.titre}</h2>
                             </Fade>
                             <div className="news__importantNews-imageCtnr">
                                 {importantNews.image.length > 0
-                                    ? <img src={importantNews.image}></img>
+                                    ? <img src={importantNews.image} alt="Actualité importante"></img>
                                     : "Pas d'image"}
                             </div>
                             <div style={{ display: "flex", flexDirection: "column", textAlign: "right", marginTop: "20px" }}>
                                 <Fade bottom>
-                                    <h2 style={{ margin: 0, textTransform: "none" }}>{importantNews.subtitle}</h2>
+                                    <h2 className="news-subtitle">{importantNews.subtitle}</h2>
                                     <p>{(importantNews.description).split('\n').map((text, i) => {
-                                        return <> {text} <br /></>
+                                        return <div key={i}> {text} <br /></div>
                                     })}</p>
                                 </Fade>
                             </div>
@@ -75,31 +71,24 @@ const NewsPanel = () => {
                     }
                 </div>
                 <ul className="news__news-list">
-                    {news.map(data => {
+                    {news.map((data, i) => {
                         return (
-                            <li key={data.id} >
+                            <li key={i} >
                                 <Fade bottom>
                                     <span>{data.titre}</span>
-                                    <h2 style={{
-                                        fontSize: "20px",
-                                        borderBottom: "4px solid #FFC045",
-                                        width: "65%",
-                                        zIndex: "9",
-                                        fontFamily: "Jost",
-                                        letterSpacing: "0.2em"
-                                    }}>{data.titre}</h2>
+                                    <h2 className="news-title-data">{data.titre}</h2>
                                 </Fade>
                                 <div className="news__news-body">
                                     <div className="news__news-imageCtnr">
                                         {data.image.length > 0
-                                            ? <img src={data.image}></img>
+                                            ? <img src={data.image} alt="Actualité"></img>
                                             : "Pas d'image"}<br></br>
                                     </div>
                                     <div style={{ display: "flex", flexDirection: "column" }}>
                                         <Fade bottom>
-                                            <h2 style={{ margin: 0, textTransform: "none" }}>{data.subtitle}</h2>
+                                            <h2 className="news-subtitle">{data.subtitle}</h2>
                                             <p>{(data.description).split('\n').map((text, i) => {
-                                                return <> {text} <br /></>
+                                                return <div key={i}> {text} <br /></div>
                                             })}</p>
                                         </Fade>
                                     </div>
