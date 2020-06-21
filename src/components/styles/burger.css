@@ -60,15 +60,16 @@
 .navMenuIcons{
     display: flex;
     justify-content: space-between;
-    width: 150px;
-    margin-top: 30px;
+    width: 150px !important;
+    padding: 0 !important;
+    margin: 30px 0 0 0 !important;
 }
 .navMenuIcons a{
     color: #000;
     transition: color .3s ease;
 }
 .navMenuIcons a:hover{
-    color: tomato;
+    color: #01AC93;
 }
 
 /*
@@ -116,8 +117,8 @@
 #menu {
     position: absolute;
     width: 250px;
-    margin: -100px 0 0 -50px;
-    padding-top: 60px;
+    margin: -100px 0 -50px;
+    padding: 60px 30px 60px 30px;
     background: #ededed;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;

@@ -6,31 +6,46 @@
     justify-content: center;
     text-align: center;
     width: 500px;
-    height: 500px;
+    height: 550px;
     background: #fff;
     color: #000;
-    -webkit-box-shadow: 0px 0px 66px 0px rgba(1, 172, 147, 0.14);
-    -moz-box-shadow: 0px 0px 66px 0px rgba(1, 172, 147, 0.14);
-    box-shadow: 0px 0px 66px 0px rgba(1, 172, 147, 0.14);
+    -webkit-box-shadow: 0px 0px 66px 0px rgba(49, 49, 49, 0.14);
+    -moz-box-shadow: 0px 0px 66px 0px rgba(49, 49, 49, 0.14);
+    box-shadow: 0px 0px 66px 0px rgba(49, 49, 49, 0.14);
+    border-radius: 5px;
 }
-.concoursContainer h1{
+
+.concoursContainer>* {
+    z-index: 999;
+}
+
+.guitarImg {
+    position: absolute;
+    right: 50px;
+    transform: rotate(-10deg);
+}
+
+.concoursContainer h1 {
     text-transform: uppercase;
 }
-.concours__form{
+
+.concours__form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 50%;
+    height: 65%;
 }
-.concours__form input{
+
+.concours__form input {
     padding: 10px 20px;
 }
-.concours__form button{
+
+.concours__form button {
     padding: 10px 20px;
     width: 100px;
-
 }
+
 .crowdImage {
     object-fit: cover;
     width: 100%;

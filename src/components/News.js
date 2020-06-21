@@ -64,6 +64,7 @@ const News = ({ news, index, isImportant }) => {
 
     const handleUpload = (e) => {
         setState({
+            ...state,
             open: true
         })
         const file = e.target.files[0]
@@ -74,6 +75,7 @@ const News = ({ news, index, isImportant }) => {
         const task = storageRef.child(name).put(file, metadata)
         task.then(snapshot => snapshot.ref.getDownloadURL())
             .then(image => {
+                
                 setState({
                     ...state,
                     image,
@@ -249,8 +251,8 @@ const News = ({ news, index, isImportant }) => {
 
             <div className="news-body2">
                 <div className="news-imageCtnr">
-                    {image.length > 0
-                        ? <img src={image} alt="Actualité"></img>
+                    {state.image.length > 0
+                        ? <img src={state.image} alt="Actualité"></img>
                         : "Pas d'image"}
                 </div>
             </div>

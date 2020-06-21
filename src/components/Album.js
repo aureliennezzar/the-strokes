@@ -1,11 +1,10 @@
 import React from 'react';
-import albumImage from '../assets/albumImage.png'
+import albumImage from '../assets/albumImage.jpg'
 import albumSvg from '../assets/album-title.svg'
 import spotifySvg from '../assets/spotify.svg'
 import deezerSvg from '../assets/deezer.svg'
 import appleSvg from '../assets/apple.svg'
 import playArrow from '../assets/play-arrow.svg'
-import Fade from 'react-reveal/Fade';
 import './styles/Album.css'
 const Album = () => {
     const albumTitles = [
@@ -32,22 +31,18 @@ const Album = () => {
             <div className="album__right">
                 <div className="album__tracklist">
 
-                    <Fade bottom >
                         {albumTitles.map((title, i) => <p key={i}><span>{i + 1}</span> {i + 1} {title}</p>)}
 
-                    </Fade>
                 </div>
                 <div className="album__available">
 
-                    <Fade bottom >
                         <div className="album__available-text" >
                             <img src={playArrow} alt="Fleche droite"></img>
-                            <p>Bientot disponible sur : </p>
+                            <p>Disponible sur : </p>
                         </div>
                         <div className="album__music-medias">
                             {musicMedias.map((media, i) => <a href={media.lien} target="_blank"  rel="noopener noreferrer" style={{ color: "rgb(0, 0, 0)" }} key={i}><img src={media.icon} alt={media.nom}></img></a>)}
                         </div>
-                    </Fade>
                 </div>
             </div>
         </section >

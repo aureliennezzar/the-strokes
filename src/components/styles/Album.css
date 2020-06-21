@@ -63,12 +63,17 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0)
+    
     /* décalage de 50% de sa propre taille */
 }
 
 .album__available-text {
     display: flex;
-    width: 400px;
+    width: 280px;
     justify-content: space-between;
 }
 
@@ -101,6 +106,10 @@
         left: 50%;
         width: 30vw;
         transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
     }
 }
 

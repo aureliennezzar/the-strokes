@@ -5,7 +5,6 @@ import { db } from '../services/firebase';
 import abnormalTour from '../assets/abnormalTour.svg'
 import AdminPanelTd from './AdminPanelTd';
 import { RoleContext } from '../contexts/RoleContext';
-import Fade from 'react-reveal/Fade';
 const TourDates = () => {
     const [concerts, setConcerts] = useState([])
     const [festivals, setFestivals] = useState([])

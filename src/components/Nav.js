@@ -6,16 +6,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import strokesLogoBlack from '../assets/the-strokes-logo-black.svg'
 import strokesLogoWhite from '../assets/the-strokes-logo-white.png'
 import crowdImage from '../assets/crowd-at-concert.jpg'
+import guitarImg from '../assets/GuitareStrokes.png'
+import MuiAlert from '@material-ui/lab/Alert';
 import './styles/burger.css'
 import './styles/concours.css'
 import './styles/Nav.css'
+import { makeStyles, Snackbar } from '@material-ui/core';
 
 
 const cymbSound = new Audio("cymb.mp3")
 const crowdSound = new Audio("crowd.mp3")
 cymbSound.volume = 0.5
-crowdSound.volume = 0.15
+crowdSound.volume = 0.1
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
+}));
 const Nav = ({ scrolled }) => {
+
+    const classes = useStyles();
     const [count, setCount] = useState(0)
     const [open, setOpen] = useState(false)
     const [burgerOn, setBurger] = useState(false)
@@ -25,6 +42,8 @@ const Nav = ({ scrolled }) => {
         lname: "",
         fname: ""
     })
+    const [openGL, setOpenGL] = useState(false)
+
     const handleChange = (e) => {
         setState({
             ...state,
@@ -37,7 +56,7 @@ const Nav = ({ scrolled }) => {
     }
 
     const handleSubmit = () => {
-        alert('Bonne chance !')
+        setOpenGL(true)
         setOpen(false)
         document.body.style.overflow = "auto";
     }
@@ -69,6 +88,12 @@ const Nav = ({ scrolled }) => {
             setCount(count + 1)
         }
     }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenGL(false);
+    };
     const handleBurger = (e) => {
         setBurger(!burgerOn)
     }
@@ -80,14 +105,15 @@ const Nav = ({ scrolled }) => {
         { scroll: "newsPanel", name: "Blog" },
         { scroll: "contact", name: "Contact" }]
     const iconsData = [
-        { href: "https://www.facebook.com/thestrokes/", icon: faFacebook, title: "Facebook" },
-        { href: "https://www.youtube.com/user/thestrokes", icon: faYoutube, title: "Youtube" },
         { href: "https://www.instagram.com/studentproject_thestrokes/", icon: faInstagram, title: "Instagram" },
-        { href: "https://twitter.com/thestrokes", icon: faTwitter, title: "Twitter" }]
+        { href: "https://www.facebook.com/thestrokes/", icon: faFacebook, title: "Facebook" },
+        { href: "https://twitter.com/thestrokes", icon: faTwitter, title: "Twitter" },
+        { href: "https://www.youtube.com/user/thestrokes", icon: faYoutube, title: "YouTube" },]
 
     const concoursDiv = <div className="concoursBackdrop">
         <img className="crowdImage" src={crowdImage} alt="Foule de concert"></img>
         <div className="concoursContainer">
+            <img className="guitarImg" src={guitarImg} alt="Guitare dédicacée"></img>
             <h1>félicitations !</h1>
             <h3>Pour participer au tirage au sort,<br /> veuillez remplir les champs ci-dessous :</h3>
             <form
@@ -117,7 +143,6 @@ const Nav = ({ scrolled }) => {
                 <img alt="Logo des Strokes" onClick={playSound} src={scrolled ? strokesLogoBlack : strokesLogoWhite}></img>
             </div>
             <div className="nav__links">
-                <li className="nav__link concoursLink">Jeu Concours</li>
                 {linksData.map(link => (
                     <Link
                         activeClass="active"
@@ -153,7 +178,6 @@ const Nav = ({ scrolled }) => {
             </div>
             <div id="menuToggle">
                 <ul id="menu" className={burgerOn ? "changeMenu" : "hideMenu"}>
-                    <li className="nav__link concoursLink">Concours</li>
                     {linksData.map(link => (
                         <Link
                             activeClass="active"
@@ -174,7 +198,7 @@ const Nav = ({ scrolled }) => {
                     ))}
 
                     <li key='brandIcons' className="nav__BrandIconsCtnr" >
-                        <div className="navMenuIcons">
+                        <li className="navMenuIcons">
                             {iconsData.map((data, i) => {
                                 const { href, title, icon } = data
                                 return (
@@ -184,12 +208,18 @@ const Nav = ({ scrolled }) => {
                                 )
 
                             })}
-                        </div>
+                        </li>
                     </li>
                 </ul>
             </div>
 
             {open ? concoursDiv : null}
+
+            <Snackbar open={openGL} autoHideDuration={4500} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={"success"}>
+                    Bonne chance {state.fname} !
+                </Alert>
+            </Snackbar>
         </nav >
     );
 }

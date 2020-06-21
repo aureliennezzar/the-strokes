@@ -48,22 +48,20 @@ const NewsPanel = () => {
                 <div className="news__importantNews">
                     {importantNews
                         ? <div style={{ width: "80%", height: "80%" }}>
-                            <Fade bottom>
-                                <span>{importantNews.titre}</span>
-                                <h2 className="importantNewsTitle">{importantNews.titre}</h2>
-                            </Fade>
+                            <span>{importantNews.titre}</span>
+                            <h2 className="importantNewsTitle">{importantNews.titre}</h2>
                             <div className="news__importantNews-imageCtnr">
                                 {importantNews.image.length > 0
                                     ? <img src={importantNews.image} alt="Actualité importante"></img>
                                     : "Pas d'image"}
                             </div>
+                            
+                            <p style={{paddingTop:"30px",textAlign:"right", margin:0}}>Publié le  <strong>{`${(importantNews.publishDate).split('-')[2]}/${(importantNews.publishDate).split('-')[1]}`}</strong></p>
                             <div style={{ display: "flex", flexDirection: "column", textAlign: "right", marginTop: "20px" }}>
-                                <Fade bottom>
-                                    <h2 className="news-subtitle">{importantNews.subtitle}</h2>
-                                    <p>{(importantNews.description).split('\n').map((text, i) => {
-                                        return <div key={i}> {text} <br /></div>
-                                    })}</p>
-                                </Fade>
+                                <h2 className="news-subtitle">{importantNews.subtitle}</h2>
+                                <p>{(importantNews.description).split('\n').map((text, i) => {
+                                    return <div key={i}> {text} <br /></div>
+                                })}</p>
                             </div>
 
                         </div>
@@ -74,10 +72,9 @@ const NewsPanel = () => {
                     {news.map((data, i) => {
                         return (
                             <li key={i} >
-                                <Fade bottom>
-                                    <span>{data.titre}</span>
-                                    <h2 className="news-title-data">{data.titre}</h2>
-                                </Fade>
+                                <span>{data.titre}</span>
+                                <h2 className="news-title-data">{data.titre}</h2>
+                                <p style={{padding:0, margin:0}}>Publié le  <strong>{`${(data.publishDate).split('-')[2]}/${(data.publishDate).split('-')[1]}`}</strong></p>
                                 <div className="news__news-body">
                                     <div className="news__news-imageCtnr">
                                         {data.image.length > 0
@@ -85,12 +82,10 @@ const NewsPanel = () => {
                                             : "Pas d'image"}<br></br>
                                     </div>
                                     <div style={{ display: "flex", flexDirection: "column" }}>
-                                        <Fade bottom>
-                                            <h2 className="news-subtitle">{data.subtitle}</h2>
-                                            <p>{(data.description).split('\n').map((text, i) => {
-                                                return <div key={i}> {text} <br /></div>
-                                            })}</p>
-                                        </Fade>
+                                        <h2 className="news-subtitle">{data.subtitle}</h2>
+                                        <p>{(data.description).split('\n').map((text, i) => {
+                                            return <div key={i}> {text} <br /></div>
+                                        })}</p>
                                     </div>
                                 </div>
                             </li>

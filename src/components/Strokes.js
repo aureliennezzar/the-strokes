@@ -1,10 +1,8 @@
 import React from 'react';
 import strokesTitle from '../assets/the-strokes-title.svg'
-import tvImage from '../assets/tv.png'
 import dateSvg from '../assets/dateTheStrokes.svg'
 import dateSvg2 from '../assets/dateTheStrokes2.svg'
 import './styles/Strokes.css'
-import Fade from 'react-reveal/Fade';
 import mockup from '../assets/mockup.mp4'
 const Strokes = () => {
     const strongStyle = {
@@ -16,7 +14,6 @@ const Strokes = () => {
             <div className="theStrokes__left">
                 <img class="strokesTitle" src={strokesTitle} alt="The Strokes titre"></img>
                 <div className="theStrokes__left-ctnr">
-                    <Fade bottom>
                         <div className="theStrokes__left-TitleCtnr">
                             <img className="dateSvg1" src={dateSvg} alt="1998 - 2020"></img>
                             <img className="dateSvg2" src={dateSvg2} alt="1998 - 2020"></img>
@@ -27,7 +24,6 @@ rock post-punk revival.</h2>
                         <p className="theStrokes__description">
                             Formé en 1998 à New York, <strong>The Strokes</strong> marque “le coup” (comme leur nom de groupe) dès le début des années 2000.<br /><br /><strong>Julian Casablancas</strong>, chanteur et principal auteur des chansons, est accompagné de ses deux guitaristes <strong>Nick Valensi</strong> et <strong>Albert Hammond Jr.</strong>, son batteur <strong>Fabrizio Moretti</strong> et son bassiste <strong>Nikolai Fraiture.</strong> En 2020, ils font leur retour avec <strong>“The New Abnormal”</strong>.
                     </p>
-                    </Fade>
 
                 </div>
                 

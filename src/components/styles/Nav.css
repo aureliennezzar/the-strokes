@@ -43,7 +43,6 @@ nav {
 /* nav * {
     border: 1px solid red;
 } */
-
 .nav__brand {
     display: flex;
     align-items: center;
@@ -102,11 +101,15 @@ nav {
 }
 
 .nav__BrandIconsCtnr {
-    width: 65% !important;
+    position: absolute;
+    bottom: 0;
+    left: -50px;
+    width: 60% !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0;
+    padding: 0;
+    margin: 0;
 }
 
 @media screen and (max-width: 1212px) {

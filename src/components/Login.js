@@ -31,14 +31,14 @@ const Login = (props) => {
         setOpen(true)
         auth().signInWithEmailAndPassword(state.email, state.password).then(() => {
             props.setOverlay(false)
+            props.setSnack([true, "Vous êtes connecté en tant qu'administrateur","success"])
             setOpen(false)
         }).catch(function (error) {
 
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert(errorCode, errorMessage);
+            props.setSnack([true, `Erreur ! ( ${errorCode} )  ${errorMessage}`,"error"])
             setOpen(false)
-
         })
     }
     return (

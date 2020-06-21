@@ -41,6 +41,7 @@ const Hero = () => {
                 <FontAwesomeIcon icon={state.muteIcon} />
             </div>
             <div className="hero__scroll-button">
+                <p><strong>The New Abnormal </strong><br />Commander </p>
                 <Link
                     activeClass="active"
                     to="theStrokes"

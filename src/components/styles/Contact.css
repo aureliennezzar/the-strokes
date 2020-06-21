@@ -1,17 +1,39 @@
 .contact {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    min-height: 50vh;
+    min-height: 45vh;
     color: #fff;
     background-color: #000;
     font-family: "Roboto";
     padding: 50px 0 10px 0;
 }
-
+#concoursBtn{
+    color: #ffc045;
+    transition: .2s ease-in-out;
+}
+#concoursBtn:hover{
+    color: #e29701;
+    transition: .2s ease-in-out;
+}
+#concoursRules{
+    width: 400px;
+    font-weight: 100;
+    font-size: 17px;
+}
+.rules button{
+   margin-bottom: 50px;
+   cursor: pointer;
+}
+.rules{
+    justify-content: space-between;
+}
+.concoursBackdrop{
+    z-index: 999;
+}
 .contact__links-ctnr p {
     color: #555555;
 }
@@ -63,11 +85,21 @@
     justify-content: space-between;
     width: 400px;
     height: auto;
+    margin-bottom: 40px;
 }
-
+.contact__brands label{
+    font-size: 13px;
+}
 .contact-icon {
+    padding: 0 15px;
     font-size: 40px;
-    color: #ffc045;
+    color: #FFC045;
+    transition: .2s ease-in-out;
+}
+.contact-icon:hover {
+    font-size: 40px;
+    color: #e29701;
+    transition: .2s ease-in-out;
 }
 
 .newsletter {
@@ -77,21 +109,26 @@
 }
 
 .newsletter__input {
-    height: 34px;
+    display: flex;
+    align-items: center;
+    height: 36px;
 }
 
 .newsletter p {
     font-size: 15px;
+    padding-top: 50px;
 }
 
 .newsletter__input input {
     outline: none;
     width: 327px;
-    height: 32px;
+    height: 100%;
     border: none;
     border-right: 1px solid #000;
     background: #fff;
     padding-left: 15px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
 }
 
 .newsletter__input button {
@@ -120,7 +157,7 @@
         font-size: 4vw;
     }
     .contact__brands {
-        width: 250.5px;
+        width: 95%;
     }
     .newsletter__input input {
         width: 55vw;

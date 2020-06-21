@@ -1,29 +1,104 @@
 .showcase{
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px + 220px);
     color: #fff;
-    object-fit: cover;
 }
-.showcase button{
-    position: absolute;
-    bottom: 100px;
-    left: 50%;
-    transform: translate(-50%, 0) !important;
+.showcase a{
+    text-decoration: none;
     text-transform: uppercase;
-    color: #fff;
+    color: #01AC93;
     font-family: Jura;
     font-size: 15px;
-    padding: 15px 35px;
-    background: #01AC93;
+    padding: 15px 25px;
+    background: #000000;
     border: 1px solid #01AC93;
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    transition: .2s ease-in-out;
 }
-.showcase img{
+.showcase a:hover{
+    color: #fff;
+    background: #01AC93;
+    border: 1px solid #01AC93;
+    transition: .2s ease-in-out;
+    
+}
+.cover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
-    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+.description {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Jura";
+    margin: 50px 0 4vw 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.description h1, .description h2 {
+    margin: 0;
+    padding: 0;
+    font-family: "Jura";
+    text-transform: uppercase;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+}
+
+.description h1 {
+    font-size: 40px;
+    font-weight: 500;
+    padding-bottom: 40px;
+}
+
+.description h2 {
+    font-size: 25px;
+    font-weight: lighter;
+    margin-bottom: 30px;
+}
+
+.description p {
+    font-size: 15px;
+    width: 885px;
+    letter-spacing: 0.2em;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 900px) {
+    .description p {
+        width: 500px;
+        letter-spacing: 0.2em;
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width: 1315px) {
+    .description {
+        margin: 50px 0 25vw 0;
+    }
+}
+@media screen and (max-width: 715px) {
+    .description {
+        margin: 50px 0 180px 0;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .description p {
+        width: auto;
+    }
 }

@@ -14,11 +14,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("../../assets/tourdates.png");
+    background-image: url("../../assets/tourdates.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     filter: brightness(70%);
+    -webkit-filter: brightness(70%);
 }
 
 .tourDates__dates-ctnr {
@@ -38,6 +39,7 @@
     padding: 0;
     top: 60px;
     font-size: 50px;
+    letter-spacing: 0.29em;
 }
 
 .tourDates__modify {
@@ -66,7 +68,7 @@
     width: 394px;
     padding: 20px 0;
     text-align: left;
-    font-family: Jura;
+    font-family: "Jura";
     font-style: normal;
     font-weight: normal;
 }
@@ -89,12 +91,16 @@
 
 .imgTourDate {
     position: absolute;
-    top: 45px;
-    left: 105px;
+    top: 50%;
+    left: 10%;
     transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
 }
 
-@media screen and (max-width:942px) {
+@media screen and (max-width:1118px) {
     .imgTourDate {
         display: none;
     }

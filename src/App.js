@@ -11,7 +11,6 @@ import Strokes from './components/Strokes';
 import Album from './components/Album';
 import Showcase from './components/Showcase';
 import Loader from './components/Loader';
-import Description from './components/Description';
 
 const App = () => {
   document.addEventListener("DOMContentLoaded", function () {
@@ -80,7 +79,6 @@ const App = () => {
           <Strokes />
           <Album />
           <Showcase />
-          <Description />
           <TourDates />
           <NewsPanel />
         </main>
